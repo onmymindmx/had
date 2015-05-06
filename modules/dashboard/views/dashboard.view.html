@@ -1,0 +1,87 @@
+<div class="container" ng-controller="DashboardController">
+    <h1>Dashboard</h1>
+    <hr>
+    <!-- Categorias -->
+    <div id="categorias" class="col-md-6 col-xs-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3"><i class="fa fa-5x fa-cube"></i></div>
+                    <div ng-if="info.categorias" class="col-xs-9 text-right">
+                        <p class="huge">{{info.categorias}}</p>
+                        <p ng-if="info.categorias == 1">categorias</p>
+                        <p ng-if="info.categorias > 1">categorias</p>
+                    </div>
+                    <div ng-if="!info.categorias" class="col-xs-9 text-right">
+                        <p class="huge">sin</p>
+                        <p>categorias</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#!/dashboard/categorias">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalle</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <!-- subcategorias  -->
+    <div id="subcategorias" class="col-md-6 col-xs-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3"><i class="fa fa-5x fa-cubes"></i></div>
+                    <div ng-if="info.subcategorias" class="col-xs-9 text-right">
+                        <p class="huge">{{info.subcategorias}}</p>
+                        <p ng-if="info.subcategorias == 1">subcategoria</p>
+                        <p ng-if="info.subcategorias > 1">subcategorias</p>
+                    </div>
+                    <div ng-if="!info.subcategorias" class="col-xs-9 text-right">
+                        <p class="huge">sin</p>
+                        <p>subcategorias</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#!/dashboard/subcategorias">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalle</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div id="lugares" class="col-md-6 col-xs-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3"><i class="fa fa-5x fa-map-marker"></i></div>
+                    <div ng-if="info.lugares" class="col-xs-9 text-right">
+                        <p class="huge">{{info.lugares}}</p>
+                        <p ng-if="info.lugares == 1">lugar</p>
+                        <p ng-if="info.lugares > 1">lugares</p>
+                    </div>
+                    <div ng-if="!info.lugares" class="col-xs-9 text-right">
+                        <p class="huge">sin</p>
+                        <p>lugares</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#!/dashboard/lugares">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalle</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>

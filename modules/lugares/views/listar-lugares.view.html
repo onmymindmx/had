@@ -1,0 +1,19 @@
+<div class="container" ng-controller="LugaresController" ng-init="find()">
+    <div class="page-header">
+        <h1>Lugares</h1>
+    </div>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        
+        <div class="panel panel-default" ng-repeat="lugar in lugares">
+            <div class="panel-heading" role="tab" id="heading{{lugar.id}}">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{lugar.id}}" aria-expanded="true" aria-controlls="collapse{{lugar.id}}">
+                        {{lugar.nombre}}
+                    </a>
+                </h4>
+            </div>
+        </div>
+
+    </div>
+</div>

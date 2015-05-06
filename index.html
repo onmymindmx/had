@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./vendor/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="./css/had.css">
+    <title>¿Hoy a dónde?</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-bar-options">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">¿Hoy a dónde?</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="nav-bar-options">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#!/signin">Acceder</a></li>
+                    <li><a href="#!/signup">Registrarse</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section ng-view></section>
+
+    <script type="text/javascript" src="./vendor/angular/angular.js"></script>
+    <script type="text/javascript" src="./vendor/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="./vendor/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="./vendor/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="./vendor/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+    <script type="text/javascript" src="./app.js"></script>
+
+    <script type="text/javascript" src="./modules/autenticacion/autenticacion.module.js"></script>
+    <script type="text/javascript" src="./modules/autenticacion/config/autenticacion.routes.js"></script>
+    <script type="text/javascript" src="./modules/autenticacion/controllers/autenticacion.controller.js"></script>
+    <script type="text/javascript" src="./modules/autenticacion/services/autenticacion.service.js"></script>
+
+    <script type="text/javascript" src="./modules/categorias/categorias.module.js"></script>
+    <script type="text/javascript" src="./modules/categorias/config/categorias.routes.js"></script>
+    <script type="text/javascript" src="./modules/categorias/controllers/categorias.controller.js"></script>
+    <script type="text/javascript" src="./modules/categorias/services/categorias.service.js"></script>
+
+    <script type="text/javascript" src="./modules/subcategorias/subcategorias.module.js"></script>
+    <script type="text/javascript" src="./modules/subcategorias/config/subcategorias.routes.js"></script>
+    <script type="text/javascript" src="./modules/subcategorias/controllers/subcategorias.controller.js"></script>
+    <script type="text/javascript" src="./modules/subcategorias/services/subcategorias.service.js"></script>  
+
+    <script type="text/javascript" src="./modules/lugares/lugares.module.js"></script>
+    <script type="text/javascript" src="./modules/lugares/config/lugares.routes.js"></script>
+    <script type="text/javascript" src="./modules/lugares/controllers/lugares.controller.js"></script>
+    <script type="text/javascript" src="./modules/lugares/services/lugares.service.js"></script>  
+
+    <script type="text/javascript" src="./modules/dashboard/dashboard.module.js"></script>
+    <script type="text/javascript" src="./modules/dashboard/config/dashboard.routes.js"></script>
+    <script type="text/javascript" src="./modules/dashboard/controllers/dashboard.controller.js"></script>
+    <script type="text/javascript" src="./modules/dashboard/services/dashboard.service.js"></script>  
+
+
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<div class="container" ng-controller="LugaresController" ng-init="findOne()">
+    <h2>Editar lugar: {{lugar.nombre}}</h2>
+    <form ng-submit="update()" ng-init="populateCategorias(); populateSubcategorias();" novalidate>
+        
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" ng-model="lugar.nombre" name="nombre" id="nombre" placeholder="Nombre">
+        </div>
+
+        <div class="form-group">
+            <label for="categoria">Categoria</label>
+            <select ng-model="lugar.categoria" ng-options="c.nombre for c in categorias track by c.id" name="categoria" id="categoria" class="form-control">
+                <option value="">Seleccione una categoria</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="subcategoria">Subcategoria</label>
+            <select name="subcategoria" id="subcategoria" ng-model="lugar.subcategoria" ng-options="s.nombre for s in subcategorias track by s.id" class="form-control">
+                <option value="">Seleccione una subcategoria</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" class="form-control" ng-model="lugar.telefono" name="telefono" id="telefono" placeholder="Teléfono">
+        </div>
+
+        <div class="form-group">
+            <label for="Direccion">Dirección</label>
+            <input type="text" class="form-control" ng-model="lugar.direccion" name="direccion" id="direccion" placeholder="Dirección">
+        </div>
+
+        <div class="form-group">
+            <label for="facebook">Facebook</label>
+            <input type="text" class="form-control" ng-model="lugar.facebook" name="facebook" id="facebook" placeholder="Facebook">
+        </div>
+
+        <div class="form-group">
+            <label for="twitter">Twitter</label>
+            <input type="text" class="form-control" ng-model="lugar.twitter" name="twitter" id="twitter" placeholder="Twitter">
+        </div>
+
+        <div class="form-group">
+            <label for="instagram">Instagram</label>
+            <input type="text" class="form-control" ng-model="lugar.instagram" name="instagram" id="instagram" placeholder="Instagram">
+        </div>
+
+        <div class="form-group">
+            <label for="website">Website</label>
+            <input type="text" class="form-control" ng-model="lugar.website" name="website" id="website" placeholder="Website">
+        </div>
+        
+        <div ng-init="createMap();">
+            <input type="text" class="form-control" ng-model="lugar.coordenadas" name="coordenadas" id="coordenadas" style="display:none;">
+            <div id="map-canvas" style="height:500px; width:500px; "></div>    
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Guardar</button>
+        </div>
+    </form>
+</div>

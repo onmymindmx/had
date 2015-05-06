@@ -1,0 +1,27 @@
+<div class="container" ng-controller="CategoriasController" ng-init="find()">
+    <div class="page-header">
+        <h1>Categorias</h1>
+    </div>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        
+        <div class="panel panel-default" ng-repeat="categoria in categorias">
+            <div class="panel-heading" role="tab" id="heading{{categoria.id}}">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{categoria.id}}" aria-expanded="true" aria-controlls="collapse{{categoria.id}}">
+                        {{categoria.nombre}}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse{{categoria.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{categoria.id}}">
+                <div class="panel-body">
+                    {{categoria.descripcion}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="alert alert-warning text-center" ng-hide="!categorias.$resolved || categorias.length">
+        Sin categorias, ¿por qué no <a href="/#!/dashboard/categorias/nueva">creas una</a>?
+    </div>
+</div>

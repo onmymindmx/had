@@ -1,0 +1,26 @@
+<div class="container" ng-controller="SubcategoriasController" ng-init="findOne()">
+    <h1>Editar subcategoria {{subcategoria.nombre}}</h1>
+    <form ng-submit="update()" ng-init="populateCategorias()" novalidate>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" ng-model="subcategoria.nombre" name="nombre" id="nombre" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+            <label for="categoria">Categoria</label>
+            <select ng-model="subcategoria.categoria" ng-options="c.nombre for c in categorias track by c.id" name="categoria" id="categoria" class="form-control">
+                <option value="">Seleccione una categoria</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="icono">Icono</label>
+            <input type="text" class="form-control" ng-model="subcategoria.icono" name="icono" id="icono" placeholder="Icono">
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input type="text" class="form-control" ng-model="subcategoria.descripcion" name="descripcion" id="descripcion" placeholder="Descripción">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-default">Actualizar</button>
+        </div>
+    </form>
+</div>
