@@ -1,5 +1,14 @@
 <div class="container" ng-controller="LugaresController" ng-init="findOne()">
+
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/dashboard/lugares">lugares</a></li>
+        <li><a ng-href="#!/dashboard/lugares/{{lugar.id}}" ng-bind="lugar.nombre"></a></li>
+        <li class="active">Editar</li>
+    </ol>
+
     <h2>Editar lugar: {{lugar.nombre}}</h2>
+
     <form ng-submit="update()" ng-init="populateCategorias(); populateSubcategorias();" novalidate>
         
         <div class="form-group">

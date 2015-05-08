@@ -1,5 +1,13 @@
 <div class="container" ng-controller="CategoriasController">
+    
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/dashboard/categorias">Categorias</a></li>
+        <li class="active">Nueva</li>
+    </ol>
+
     <h1>Nueva categoria</h1>
+    
     <form ng-submit="create()" novalidate>
         <div class="form-group">
             <label for="nombre">Nombre</label>
@@ -17,4 +25,5 @@
             <button type="submit" class="btn btn-default">Guardar</button>
         </div>
     </form>
+    
 </div>

@@ -1,5 +1,13 @@
 <div class="container" ng-controller="LugaresController">
+    
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/dashboard/lugares">Lugares</a></li>
+        <li class="active">Nuevo</li>
+    </ol>
+
     <h1>Nuevo lugar</h1>
+
     <form ng-submit="create()" ng-init="populateCategorias(); populateSubcategorias();" novalidate>
 
         <div class="form-group">

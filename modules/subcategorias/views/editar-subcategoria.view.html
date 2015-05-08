@@ -1,5 +1,14 @@
 <div class="container" ng-controller="SubcategoriasController" ng-init="findOne()">
+    
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/dashboard/subcategorias">Subcategorias</a></li>
+        <li><a ng-href="#!/dashboard/subcategorias/{{subcategoria.id}}" ng-bind="subcategoria.nombre"></a></li>
+        <li class="active">Editar</li>
+    </ol>
+
     <h1>Editar subcategoria {{subcategoria.nombre}}</h1>
+
     <form ng-submit="update()" ng-init="populateCategorias()" novalidate>
         <div class="form-group">
             <label for="nombre">Nombre</label>

@@ -1,7 +1,14 @@
 <div class="container" ng-controller="SubcategoriasController" ng-init="find()">
+    
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li class="active">Subategorias</li>
+    </ol>
+
     <div class="page-header">
         <h2>Subcategorias</h2>
     </div>
+    
     <div class="list-group">
         <ul>
             <li ng-repeat="subcategoria in subcategorias" class="list-group-item">

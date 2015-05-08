@@ -1,5 +1,14 @@
 <div class="container" ng-controller="CategoriasController" ng-init="findOne()">
-    <h1>Editar categoria {{categoria.nombre}}</h1>
+    
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/dashboard/categorias">Categorias</a></li>
+        <li><a ng-href="#!/dashboard/categorias/{{categoria.id}}" ng-bind="categoria.nombre"></a></li>
+        <li class="active">Editar</li>
+    </ol>
+
+    <h1 ng-bind="'Editar categoria' categoria.nombre"></h1>
+    
     <form ng-submit="update()" novalidate>
         <div class="form-group">
             <label for="nombre">Nombre</label>
@@ -17,4 +26,5 @@
             <button type="submit" class="btn btn-default">Actualizar</button>
         </div>
     </form>
+    
 </div>
