@@ -15,7 +15,7 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
 
 
         $scope.login = function() {
-
+            $scope.error = null;
             $auth.login({
                 email: this.email,
                 password: this.password
@@ -37,19 +37,21 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
         };
 
         $scope.signup = function(){
+            $scope.error = null;
             $auth.signup({
                 email: this.email,
-                password: this.password
+                password: this.password,
+                username: this.username
             })
                 .then(function(){
-                    var token = $auth.getPayload();
-                    $scope.token = token.email;
+                     // Asignamos variables para confirmar que estamos loggeados
                     Autenticacion.isLogged = true;
+                    // Corremos la funcion para el navbar
+                    $scope.logged();
                     $location.path('/');
                 })
                 .catch(function(response) {
-                    console.log('No registrado');
-                    console.error(response);
+                    $scope.error = response.data.message;
                 });
         };
 
