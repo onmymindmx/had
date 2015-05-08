@@ -1,5 +1,6 @@
-angular.module('dashboard').controller('DashboardController', ['$scope', 'Dashboard',
-    function($scope, Dashboard) {
+angular.module('dashboard').controller('DashboardController', ['$scope', '$location', 'Dashboard',
+    function($scope, $location, Dashboard) {
+
         var dashboard = Dashboard.info();
         dashboard.success(function(response) {
             $scope.info = response;

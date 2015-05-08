@@ -1,8 +1,11 @@
-angular.module('dashboard').config(['$routeProvider', 
+angular.module('dashboard').config(['$routeProvider',
     function($routeProvider) {
         $routeProvider
             .when('/dashboard', {
-                templateUrl: './modules/dashboard/views/dashboard.view.html'
+                templateUrl: './modules/dashboard/views/dashboard.view.html',
+                access: {
+                    requiredLogin: true
+                }
             });
     }
 ]);
