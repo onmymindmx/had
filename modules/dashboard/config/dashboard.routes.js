@@ -4,7 +4,8 @@ angular.module('dashboard').config(['$routeProvider',
             .when('/dashboard', {
                 templateUrl: './modules/dashboard/views/dashboard.view.html',
                 access: {
-                    requiredLogin: true
+                    requiredLogin: true,
+                    userShouldBeAdmin: true
                 }
             });
     }

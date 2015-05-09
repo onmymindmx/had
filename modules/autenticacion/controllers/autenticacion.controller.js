@@ -4,15 +4,28 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
         // Función para pasar las varibles de autenticación al navbar y ocultar o mostrar los datos necesarios
         $scope.logged = function() {
             if($auth.getToken()){
+                // Para mostrar nuestro nombre de usuario
                 var token = $auth.getPayload();
-                $scope.token = token.email;
+                $scope.token = token.user;
+
+                // Verificamos qué perfil tenemos
+                Autenticacion.isAdmin = token.user.isAdmin == 1 ? true : false;
+                // Asignamos variables para confirmar que estamos loggeados
+                Autenticacion.isLogged = true;
                 return true;
             } else {
                 false;
             }
         }
-        
 
+        $scope.isAdmin = function() {
+            var token = $auth.getPayload();
+            if(token.user.isAdmin === 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         $scope.login = function() {
             $scope.error = null;
@@ -21,10 +34,9 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
                 password: this.password
             })
                 .then(function() {
-                    // Asignamos variables para confirmar que estamos loggeados
-                    Autenticacion.isLogged = true;
-                    // Corremos la funcion para el navbar
+                    // Propagamos el acceso
                     $scope.logged();
+                    $scope.isAdmin();
                     $location.path('/');
                 })
                 .catch(function(response) {
@@ -44,10 +56,9 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
                 username: this.username
             })
                 .then(function(){
-                     // Asignamos variables para confirmar que estamos loggeados
-                    Autenticacion.isLogged = true;
-                    // Corremos la funcion para el navbar
+                    // Propagamos el acceso
                     $scope.logged();
+                    $scope.isAdmin();
                     $location.path('/');
                 })
                 .catch(function(response) {
@@ -59,7 +70,7 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
             $auth.logout()
                 .then(function() {
                     Autenticacion.isLogged = false;
-                    Autenticacion.email = null;
+                    Autenticacion.isAdmin = false;
                     $location.path('/');
                 });
         };

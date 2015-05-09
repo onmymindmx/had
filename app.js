@@ -19,9 +19,17 @@ mainApplicationModule
         function($rootScope, $location, Autenticacion){
             // Si se refresca la página, se checa la autenticación
             Autenticacion.check();
+
+            // Verificamos si puede acceder a la siguiente ruta
             $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
-                if((nextRoute.access && nextRoute.access.requiredLogin) && !Autenticacion.isLogged) {
+                // Verificamos que este loggeado, si no, lo mandamos a loggearse
+                if(nextRoute.access.requiredLogin && !Autenticacion.isLogged) {
                     $location.path('/signin');
+                }
+
+                // Verificamos que este en el perfil adecuado para entrar
+                if(nextRoute.access.userShouldBeAdmin && !Autenticacion.isAdmin) {
+                    $location.path('/');
                 }
             });
         }
