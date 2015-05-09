@@ -14,6 +14,25 @@ mainApplicationModule
             $authProvider.tokenPrefix = "had";
         }
     ])
+    .config(['$httpProvider', 'satellizer.config', 
+        function($httpProvider, config) {
+            $httpProvider.interceptors.push(['$q', function($q) {
+                var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
+                return {
+                    request: function(httpConfig) {
+                        var token = localStorage.getItem(tokenName);
+                        if(token) {
+                            httpConfig.headers.Authorization = 'Bearer ' + token;
+                        }
+                        return httpConfig;
+                    },
+                    responseError: function(response) {
+                        return $q.reject(response);
+                    }
+                };
+            }]);
+        }
+    ])
     .run( 
          // Funnción para mandar a la página de loggeo si no hay sessión
         function($rootScope, $location, Autenticacion){
