@@ -1,6 +1,6 @@
 var mainApplicationModuleName = 'had';
 
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource', 'ngRoute', 'satellizer', 'autenticacion', 'categoria', 'subcategoria', 'lugar', 'dashboard']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource', 'ngRoute', 'satellizer', 'autenticacion', 'map','categoria', 'subcategoria', 'lugar', 'dashboard']);
 
 mainApplicationModule
     .config(['$locationProvider', '$authProvider',

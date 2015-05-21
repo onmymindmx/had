@@ -1,0 +1,40 @@
+<div ng-controller="MapController">
+    <div class="row">
+        <div class="col-sm-3" ng-init="populateSubcategorias()">
+            <table class="table table-bordered table-condensed">
+                <tbody>
+                    <tr>
+                        <td><a ng-click="filters.subcategoria = ''">Todos</a></td>
+                    </tr>
+                    <tr ng-repeat="subcategoria in subcategorias | filter: {categoria: {id:filters.categoria}}">
+                        <td><a ng-click="filters.subcategoria = subcategoria.id">{{subcategoria.nombre}} - {{subcategoria.id}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-9">
+            <div class="col-sm-12" ng-init="populateLugares()">
+                <ul>
+                    <li ng-repeat="lugar in lugares | filter: {categoria: {id: filters.categoria}} | filter: {subcategoria: {id:filters.subcategoria}}">
+                        {{lugar.nombre}} - {{lugar.categoria.id}} - {{lugar.subcategoria.id}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12" ng-init="populateCategorias()">
+            <table class="table table-bordered table-condensed table-responsive">
+                <tbody>
+                    <tr class="text-center">
+                        <td><a ng-click="filters.categoria = ''; filters.subcategoria= ''">Todos</a></td>
+                        <td ng-repeat="categoria in categorias">
+                            <a ng-click="filters.categoria = categoria.id; filters.subcategoria = ''">{{categoria.nombre}}</a>
+                        </td>        
+                    </tr>    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
