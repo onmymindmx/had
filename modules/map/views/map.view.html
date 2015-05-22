@@ -13,12 +13,28 @@
             </table>
         </div>
         <div class="col-sm-9">
-            <div class="col-sm-12" ng-init="populateLugares()">
+            <!--<div class="col-sm-12" ng-init="populateLugares()">
                 <ul>
                     <li ng-repeat="lugar in lugares | filter: {categoria: {id: filters.categoria}} | filter: {subcategoria: {id:filters.subcategoria}}">
-                        {{lugar.nombre}} - {{lugar.categoria.id}} - {{lugar.subcategoria.id}}
+                        
                     </li>
                 </ul>
+            </div>-->
+            <div ng-init="mapa()">
+                <div ng-if="mapReady">
+                    <mapbox id="mapa" map_id="{{ map_id }}" lat="{{ lat }}" lng="{{ lng }}" zoom="{{ zoomMap }}" scrollWheelZoom="false">
+                        
+                    </mapbox>
+                </div>
+                <div ng-if="!mapReady" id="mensajes">
+                    <div ng-if="!errorLocation">
+                        <h1>Cargando...</h1>
+                    </div>
+
+                    <div ng-if="errorLocation">
+                        <h1 data-ng-bind="errorLocationMsg"></h1>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
