@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./vendor/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="./vendor/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css">
+    <link rel="stylesheet" href="./vendor/mapbox.js/mapbox.css">
     <link rel="stylesheet" href="./css/had.css">
     <title>¿Hoy a dónde?</title>
 </head>
@@ -18,18 +18,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">¿Hoy a dónde?</a>
+                <a href="/#!/" class="navbar-brand">¿Hoy a dónde?</a>
             </div>
 
             <div class="collapse navbar-collapse" id="nav-bar-options">
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="!logged()"><a href="#!/signin" ng-bind="'Acceder'"></a></li>
                     <li ng-show="!logged()"><a href="#!/signup" ng-bind="'Registrarse'"></a></li>
+                    <li ng-show="logged()"><a href="#!/nuevo-lugar" ng-bind="'Registra tu negocio'"></a></li>
                     <li ng-show="logged()" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-cloak> {{token.username}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li ng-show="isAdmin()"><a href="#!/dashboard">Dashboard</a></li>
-                            <li><a href="#" ng-click="logout()">Cerrar sesión</a></li>
+                            <li><a href="#!/perfil">Perfil</a></li>
+                            <li><a href="#!/" ng-click="logout()">Cerrar sesión</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -44,8 +46,9 @@
     <script type="text/javascript" src="./vendor/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="./vendor/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="./vendor/satellizer/satellizer.js"></script>
-    <script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+    <script type="text/javascript" src="./vendor/mapbox.js/mapbox.js"></script>
     <script type="text/javascript" src="./vendor/angular-mapbox/dist/angular-mapbox.js"></script>
+    <script type="text/javascript" src="./vendor/angular-scroll/angular-scroll.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 

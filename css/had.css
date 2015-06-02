@@ -1,6 +1,119 @@
 .huge {
   font-size: 40px;
 }
+body{
+  background-color: #FFFFFF;
+}
+footer{
+  padding: 10px 0 10px 0;
+  background-color: #7D7D7D;
+  color: #FFFFFF;
+}
+
+hr{
+  color: #B6B6B6;
+}
+
+#info-place{
+  background-color: yellow;
+  -webkit-box-shadow: 0px 5px 50px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.2);
+  margin-top: 20px;
+}
+
+.btn-green { 
+  color: #ffffff; 
+  background-color: #8BC34A; 
+  border-color: #8BC34A; 
+} 
+ 
+.btn-green:hover, 
+.btn-green:focus, 
+.btn-green:active, 
+.btn-green.active, 
+.open .dropdown-toggle.btn-green { 
+  color: #ffffff; 
+  background-color: #689F38; 
+  border-color: #689F38; 
+} 
+ 
+.btn-green:active, 
+.btn-green.active, 
+.open .dropdown-toggle.btn-green { 
+  background-image: none; 
+} 
+ 
+.btn-green.disabled, 
+.btn-green[disabled], 
+fieldset[disabled] .btn-green, 
+.btn-green.disabled:hover, 
+.btn-green[disabled]:hover, 
+fieldset[disabled] .btn-green:hover, 
+.btn-green.disabled:focus, 
+.btn-green[disabled]:focus, 
+fieldset[disabled] .btn-green:focus, 
+.btn-green.disabled:active, 
+.btn-green[disabled]:active, 
+fieldset[disabled] .btn-green:active, 
+.btn-green.disabled.active, 
+.btn-green[disabled].active, 
+fieldset[disabled] .btn-green.active { 
+  background-color: #8BC34A; 
+  border-color: #8BC34A; 
+} 
+ 
+.btn-green .badge { 
+  color: #8BC34A; 
+  background-color: #ffffff; 
+}
+
+#apps{
+  padding: 10px 0 10px 0;
+  background-color: #BFBFBF;
+  color: #FFFFFF; 
+}
+
+.angular-mapbox-map{
+  height: 550px !important;
+  width: 100% !important;
+}
+
+#head {
+  background-color: #8BD1E3;
+  margin-bottom: 20px;
+  text-align: center;
+  -webkit-box-shadow: 0px 5px 50px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.2);
+}
+
+.btn-filter {
+  margin: 10px;
+}
+
+
+.bolita {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-box-shadow: 0px 5px 50px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 10px 2px rgba(0,0,0,0.2);
+  text-align: center;
+  font-size: 31px;
+}
+
+.bolita > .huge {
+  padding-top: -5px;
+}
 
 .form-signin {
   max-width: 330px;

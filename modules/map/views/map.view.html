@@ -1,56 +1,114 @@
-<div ng-controller="MapController">
-    <div class="row">
-        <div class="col-sm-3" ng-init="populateSubcategorias()">
-            <table class="table table-bordered table-condensed">
-                <tbody>
-                    <tr>
-                        <td><a ng-click="filters.subcategoria = ''">Todos</a></td>
-                    </tr>
-                    <tr ng-repeat="subcategoria in subcategorias | filter: {categoria: {id:filters.categoria}}">
-                        <td><a ng-click="filters.subcategoria = subcategoria.id">{{subcategoria.nombre}} - {{subcategoria.id}}</a></td>
-                    </tr>
-                </tbody>
-            </table>
+<div ng-controller="MapController" ng-init="mapa()">
+    <div ng-show="mapReady" class="container well" id="head" ng-init="populateCategorias()">
+        <div ng-show="mapReady">
+            <h2>¿Qué tipo de lugar o actividad estás buscando en {{ city }}?</h2>
+            <div id="filtros">
+                <div id="categorias">
+                    <button class="btn btn-green btn-lg btn-filter" ng-click="filters.categoria = ''">Todos</button>
+                    <button class="btn btn-green btn-lg btn-filter" ng-repeat="categoria in categorias" ng-click="filters.categoria = categoria.id; filters.subcategoria = ''"> {{ categoria.nombre }} </button> 
+                </div>
+                <hr ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''">
+                <div id="subcategorias" ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''" ng-init="populateSubcategorias()">
+                    <button class="btn btn-green btn-sm btn-filter" ng-click="filters.subcategoria = ''"> Todos </button>
+                    <button class="btn btn-green btn-sm btn-filter" ng-repeat="subcategoria in subcategorias | filter: {categoria: {id:filters.categoria}}" ng-click="filters.subcategoria = subcategoria.id"> {{subcategoria.nombre}} </button>
+                </div>        
+            </div>
+            
         </div>
-        <div class="col-sm-9">
-            <!--<div class="col-sm-12" ng-init="populateLugares()">
-                <ul>
-                    <li ng-repeat="lugar in lugares | filter: {categoria: {id: filters.categoria}} | filter: {subcategoria: {id:filters.subcategoria}}">
-                        
-                    </li>
-                </ul>
-            </div>-->
-            <div ng-init="mapa()">
-                <div ng-if="mapReady">
-                    <mapbox id="mapa" map_id="{{ map_id }}" lat="{{ lat }}" lng="{{ lng }}" zoom="{{ zoomMap }}" scrollWheelZoom="false">
-                        
-                    </mapbox>
-                </div>
-                <div ng-if="!mapReady" id="mensajes">
-                    <div ng-if="!errorLocation">
-                        <h1>Cargando...</h1>
-                    </div>
+        
+    </div>
 
-                    <div ng-if="errorLocation">
-                        <h1 data-ng-bind="errorLocationMsg"></h1>
-                    </div>
-                </div>
+    <div id="map">
+        <div ng-if="mapReady">
+            <mapbox id="mapa" map_id="{{ map_id }}" lat="{{ lat }}" lng="{{ lng }}" zoom="{{ zoomMap }}" >
+                <marker ng-repeat="lugar in lugares | filter: {categoria: {id: filters.categoria}} | filter: {subcategoria: {id:filters.subcategoria}}" lat="{{ lugar.latLng.lat }}" lng="{{ lugar.latLng.lng }}">
+                    <strong ng-bind="lugar.nombre"></strong>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae esse porro quia voluptatibus laborum, laboriosam magnam deleniti ab velit veritatis natus eius aperiam alias repellendus reiciendis enim dolore eos, ullam!</p>
+                    <p>
+                        <a ng-click="obtenerLugar(lugar.id); " class="btn btn-default btn-xs">Más información</a>
+                    </p>
+                </marker>
+            </mapbox>
+        </div>
+        <div class="container" ng-if="!mapReady" id="mensajes">
+            <div ng-if="!errorLocation">
+                <h1>Cargando...</h1>
+            </div>
+
+            <div ng-if="errorLocation">
+                <h1 data-ng-bind="errorLocationMsg"></h1>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-sm-12" ng-init="populateCategorias()">
-            <table class="table table-bordered table-condensed table-responsive">
-                <tbody>
-                    <tr class="text-center">
-                        <td><a ng-click="filters.categoria = ''; filters.subcategoria= ''">Todos</a></td>
-                        <td ng-repeat="categoria in categorias">
-                            <a ng-click="filters.categoria = categoria.id; filters.subcategoria = ''">{{categoria.nombre}}</a>
-                        </td>        
-                    </tr>    
-                </tbody>
-            </table>
-        </div>
+    <div id="info-place" class="container well" ng-show="lugar" ng-hide="!lugar">
+        <h2 ng-bind="lugar.nombre"></h2>
+        <h3> {{lugar.categoria.nombre}} <small ng-bind="lugar.subcategoria.nombre"></small> </h3>
+        <strong ng-bind="lugar.direccion"></strong>
+        <p ng-bind="lugar.telefono"></p>
+        <p><b>Facebook:</b> <span ng-bind="lugar.facebook"></span></p>
+        <p><b>Twitter:</b> <span ng-bind="lugar.twitter"></span></p>
+        <p><b>Instagram:</b> <span ng-bind="lugar.instagram"></span></p>
+        <p><b>Website:</b> <span ng-bind="lugar.website"></span></p>
     </div>
+    
+    <div id="apps" ng-show="mapReady">
+        <div class="container">
+            <div class="col-sm-9">
+                <h4>Encuentra los mejores lugares en {{ city }} desde tu smartphone o table.</h4>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button class="btn btn-block btn-default"><i class="fa fa-2x fa-android"></i> Descargar para Android</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-block btn-default"><i class="fa fa-2x fa-apple"></i>Descargar para iOS</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                
+            </div>
+            
+        </div>    
+    </div>
+    
+    <footer ng-show="mapReady">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <strong>Directorio de lugares</strong>
+                    <ul>
+                        <li>Lugar</li>
+                        <li>Lugar</li>
+                        <li>Lugar</li>
+                        <li>Lugar</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <strong>Anunciate</strong>
+                    <ul>
+                        <li>Publica tu negocio</li>
+                        <li>Publica tu evento</li>
+                        <li>Precios</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-xs-4"><i class="fa fa-2x fa-facebook"></i></div>
+                        <div class="col-xs-4"><i class="fa fa-2x fa-twitter"></i></div>
+                        <div class="col-xs-4"><i class="fa fa-2x fa-instagram"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p>
+                    ©2015 On My Mind
+                </p>
+                <p>
+                    Terminos de servicio | Politicas de privacidad | Contacto | Preguntas y Soporte    
+                </p>
+                
+            </div>
+        </div>
+    </footer>
+
 </div>
