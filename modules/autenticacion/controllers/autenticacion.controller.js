@@ -1,5 +1,7 @@
-angular.module('autenticacion').controller('AutenticacionController', ['$scope', '$auth', '$location', 'Autenticacion', 
-    function($scope, $auth, $location, Autenticacion) {
+angular.module('autenticacion').controller('AutenticacionController', ['$scope', '$auth', '$location', 'Autenticacion', 'toaster',
+    function($scope, $auth, $location, Autenticacion, toaster) {
+        
+        
 
         // Función para pasar las varibles de autenticación al navbar y ocultar o mostrar los datos necesarios
         $scope.logged = function() {
@@ -38,6 +40,7 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
                     $scope.logged();
                     $scope.isAdmin();
                     $location.path('/');
+                    toaster.pop('success', "Acceso correcto", "¡Bienvenido de nuevo! Ya te extrañabamos");
                 })
                 .catch(function(response) {
                     if(response.status == '401'){
@@ -72,6 +75,7 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
                     Autenticacion.isLogged = false;
                     Autenticacion.isAdmin = false;
                     $location.path('/');
+                    toaster.pop('warning', "Sesión cerrada", "Esperamos que regreses pronto");
                 });
         };
     }

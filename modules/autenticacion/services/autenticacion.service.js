@@ -1,4 +1,5 @@
-angular.module('autenticacion').factory('Autenticacion', function($auth) {
+angular.module('autenticacion')
+.factory('Autenticacion', function($auth) {
     var auth = {
         isLogged: false,
         isAdmin: false,
