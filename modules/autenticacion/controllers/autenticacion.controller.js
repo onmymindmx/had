@@ -56,7 +56,9 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
             $auth.signup({
                 email: this.email,
                 password: this.password,
-                username: this.username
+                username: this.username,
+                first_name: this.first_name, 
+                last_name: this.last_name
             })
                 .then(function(){
                     // Propagamos el acceso

@@ -28,7 +28,12 @@
                     <li ng-show="!logged()"><a href="#!/signup" ng-bind="'Registrarse'"></a></li>
                     <li ng-show="logged()"><a href="#!/nuevo-lugar" ng-bind="'Registra tu negocio'"></a></li>
                     <li ng-show="logged()" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-cloak> {{token.username}} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-cloak> 
+                            
+                            <span ng-if="token.first_name && token.last_name" ng-bind="token.first_name + ' ' + token.last_name"></span>
+                            <span ng-if="!token.first_name || !token.last_name" ng-bind="token.username"></span>
+                            <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu" role="menu">
                             <li ng-show="isAdmin()"><a href="#!/dashboard">Dashboard</a></li>
                             <li><a href="#!/perfil">Perfil</a></li>

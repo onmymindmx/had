@@ -1,6 +1,6 @@
 angular.module('map').controller('MapController', ['$scope', '$document', '$timeout', 'Categorias', 'Subcategorias', 'Lugares', 'mapboxService', 'toaster',
     function($scope, $document, $timeout, Categorias, Subcategorias, Lugares, mapboxService, toaster) {
-        var map;
+        
         $scope.filters = {
             categoria: "",
             subcategoria: ""
@@ -61,9 +61,12 @@ angular.module('map').controller('MapController', ['$scope', '$document', '$time
                     $scope.zoomMap = "15";
                     $scope.mapReady = true;
                 });
-                console.log(mapboxService.getMapInstances());
-                map = mapboxService.getMapInstances()[0];
-                map.scrollWheelZoom.disable();
+                // Deshabilitamos el scroll por cada mapa.
+                var instances = mapboxService.getMapInstances();
+                instances.forEach(function(entry) {
+                    entry.scrollWheelZoom.disable();
+                });
+                
             }
 
             function geo_error(){
