@@ -1,0 +1,95 @@
+<div class="container" ng-controller="LugaresController">
+    <h2>Registra tu negocio</h2>
+    <div id="info" class="text-center">
+        <p>Todavía tienes dudas de porqué registrar tu negocio en ¿Hoy a dónde?. Checa los beneficios que tenemos para ti</p>
+        <button ng-click="goTo('beneficios')" class="btn btn-primary">Beneficios que obtengo al registrar mi lugar</button>
+        <p>Si ya estás listo, llena el siguiente formulario para empezar a disfrutar de todos los beneficios</p>    
+    </div>
+    
+    <hr>
+    
+    <form id="form-registro-negocio" ng-submit="create()" ng-init="populateCategorias(); populateSubcategorias();" novalidate>
+        <div class="row">
+            <div class="col-sm-6">
+            
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" ng-model="nombre" name="nombre" id="nombre" placeholder="ej: ¡El mejor lugar en la ciudad!">
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoria</label><br/>
+                    
+                    <label ng-repeat="c in categorias">
+                        <input ng-click="categoriaValue(c.id)" name="categoria" type="radio" value="{{c.id}}" ng-model="$parent.categoria" ng-value="{{c.id}}"/>&nbsp;{{c.nombre}}&nbsp;
+                    </label>
+                </div>
+
+                <div class="form-group" ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''">
+                    <label for="subcategoria">Subcategoria</label><br/>
+                    <label><input name="subcategoria" type="radio" value="0" ng-model="subcategoria">&nbsp;Ninguna&nbsp;</label>
+                    
+                    <label ng-repeat="s in subcategorias | filter: {categoria:{id:filters.categoria}}">
+                        <input name="subcategoria" type="radio" value="{{s.id}}" ng-model="$parent.subcategoria" ng-value="{{s.id}}">&nbsp;{{s.nombre}}&nbsp;
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" class="form-control" ng-model="telefono" name="telefono" id="telefono" placeholder="Solo si ofreces servicio a domicilio, reservaciones o información, no es obligatorio.">
+                </div>
+
+                <div class="form-group">
+                    <label for="Direccion">Dirección</label>
+                    <input type="text" class="form-control" ng-model="direccion" name="direccion" id="direccion" placeholder="Dirección">
+                </div>
+
+                <div class="form-group">
+                    <label for="facebook">Facebook</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">http://www.facebook.com/</div>
+                        <input type="text" class="form-control" ng-model="facebook" name="facebook" id="facebook" placeholder="ej: hoyadondemx">    
+                    </div>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="twitter">Twitter</label>
+                    <input type="text" class="form-control" ng-model="twitter" name="twitter" id="twitter" placeholder="ej: @hoyadondemx">
+                </div>
+
+                <div class="form-group">
+                    <label for="instagram">Instagram</label>
+                    <input type="text" class="form-control" ng-model="instagram" name="instagram" id="instagram" placeholder="ej: @hoyadondemx">
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Website</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">http://</div>
+                        <input type="text" class="form-control" ng-model="website" name="website" id="website" placeholder="ej: www.hoyadonde.mx">    
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <h4>Ubica tu lugar en el mapa. <small>Arrastrando el puntero rojo</small></h4>
+                <div ng-init="createMap();">
+                    <input type="text" class="form-control" ng-model="coordenadas" name="coordenadas" id="coordenadas" style="display:none;">
+                    <div id="map-canvas" style="height:600px; width:100%; "></div>    
+                </div>
+                <br/>
+            </div>    
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Registra mi negocio</button>
+        </div>
+    </form>
+    
+    <hr>
+    <div id="beneficios">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium deleniti explicabo, beatae fugiat nesciunt? Architecto nulla aperiam facere eos. Facere delectus magni impedit deserunt, placeat aspernatur veniam inventore quaerat corporis!</p>
+        <button class="btn btn-primary" ng-click="goTo('form-registro-negocio')">Quiero registrar mi negocio</button>
+    </div>
+</div>

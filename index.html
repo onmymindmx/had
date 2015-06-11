@@ -29,7 +29,6 @@
                     <li ng-show="logged()"><a href="#!/nuevo-lugar" ng-bind="'Registra tu negocio'"></a></li>
                     <li ng-show="logged()" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-cloak> 
-                            
                             <span ng-if="token.first_name && token.last_name" ng-bind="token.first_name + ' ' + token.last_name"></span>
                             <span ng-if="!token.first_name || !token.last_name" ng-bind="token.username"></span>
                             <span class="caret"></span>

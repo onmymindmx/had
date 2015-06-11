@@ -28,6 +28,13 @@ angular.module('lugar').config(['$routeProvider',
                     requiredLogin: true,
                     userShouldBeAdmin: true
                 }
-            });
+            })
+            .when('/nuevo-lugar', {
+                templateUrl: '/modules/lugares/views/nuevo-lugar-por-usuario.view.html',
+                access: {
+                    requiredLogin: true,
+                    userShouldBeAdmin: false
+                }
+            })
     }
 ]);

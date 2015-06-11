@@ -1,9 +1,16 @@
-angular.module('lugar').controller('LugaresController', ['$scope', '$routeParams', '$location', 'Categorias', 'Subcategorias', 'Lugares', 
-    function($scope, $routeParams, $location, Categorias, Subcategorias, Lugares) {
+angular.module('lugar').controller('LugaresController', ['$scope', '$document', '$timeout', '$routeParams', '$location', 'Categorias', 'Subcategorias', 'Lugares', 
+    function($scope, $document, $timeout, $routeParams, $location, Categorias, Subcategorias, Lugares) {
 
-        $scope.filters = {};
-        $scope.test = function(){
-            console.log($scope.categoria);
+        $scope.filters = {
+            categoria:''
+        };
+        $scope.goTo = function(seccion){
+            var seccionDom = angular.element(document.getElementById(seccion));
+            $document.scrollToElement(seccionDom, 30, 1000);
+        }
+
+        $scope.categoriaValue = function(value){
+            $scope.filters.categoria = value;
         }
 
         function getLocationError(msg) {
@@ -30,7 +37,8 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$routeParams
                         var longitude = position.coords.longitude;
                         var mapOptions = {
                                 zoom: 16,
-                                center: new google.maps.LatLng(latitude, longitude)
+                                center: new google.maps.LatLng(latitude, longitude),
+                                scrollwheel: false
                             };
                         document.getElementById('coordenadas').value = latitude + "," + longitude;    
                     } else {
@@ -38,7 +46,8 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$routeParams
                         var coordenadas = coor.split(",");
                         var mapOptions = {
                                 zoom: 16,
-                                center: new google.maps.LatLng(coordenadas[0], coordenadas[1])
+                                center: new google.maps.LatLng(coordenadas[0], coordenadas[1]),
+                                scrollwheel: false
                             };    
                         document.getElementById('coordenadas').value = coor;    
                     }
@@ -82,8 +91,8 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$routeParams
         $scope.create = function() {
             var lugar = new Lugares({
                 nombre: this.nombre,
-                categoria: this.categoria.id,
-                subcategoria: this.subcategoria.id,
+                categoria: this.categoria,
+                subcategoria: this.subcategoria,
                 direccion: this.direccion,
                 coordenadas: this.coordenadas,
                 telefono: this.telefono,
@@ -102,8 +111,8 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$routeParams
 
         $scope.update = function() {
             var lugar = $scope.lugar;
-            lugar.categoria = lugar.categoria.id;
-            lugar.subcategoria = lugar.subcategoria.id;
+            lugar.categoria = lugar.categoria;
+            lugar.subcategoria = lugar.subcategoria;
             lugar.$update(function(response) {
                 console.log(response)
             }, function(errorResponse) {
