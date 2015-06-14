@@ -1,5 +1,5 @@
-angular.module('lugar').controller('LugaresController', ['$scope', '$document', '$timeout', '$routeParams', '$location', 'Categorias', 'Subcategorias', 'Lugares', 
-    function($scope, $document, $timeout, $routeParams, $location, Categorias, Subcategorias, Lugares) {
+angular.module('lugar').controller('LugaresController', ['$scope', '$document', '$timeout', '$routeParams', '$location', 'Categorias', 'Subcategorias', 'Lugares', 'toaster',
+    function($scope, $document, $timeout, $routeParams, $location, Categorias, Subcategorias, Lugares, toaster) {
 
         $scope.filters = {
             categoria:''
@@ -89,21 +89,25 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
         };
 
         $scope.create = function() {
+            if(this.subcategoria == 0){
+                this.subcategoria = null;
+            }
             var lugar = new Lugares({
                 nombre: this.nombre,
                 categoria: this.categoria,
-                subcategoria: this.subcategoria,
+                subcategoria: this.subcategoria || null,
                 direccion: this.direccion,
                 coordenadas: this.coordenadas,
-                telefono: this.telefono,
-                facebook: this.facebook,
-                twitter: this.twitter,
-                instagram: this.instagram,
-                website: this.website
+                telefono: this.telefono || null,
+                facebook: this.facebook || null,
+                twitter: this.twitter || null,
+                instagram: this.instagram || null,
+                website: this.website || null
             });
 
             lugar.$save(function(response) {
-                console.log(response)
+                $location.path('/');
+                toaster.pop('success', "Lugar agregado con éxito", "¡El lugar se agregó con éxito!");
             }, function(errorResponse) {
                 console.error('Error');
             });
