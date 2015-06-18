@@ -8,30 +8,37 @@
     
     <hr>
     
-    <form id="form-registro-negocio" ng-submit="create()" ng-init="populateCategorias(); populateSubcategorias();" novalidate>
+    <form id="formRegistroNegocio" name="formRegistroNegocio" ng-submit="create()" ng-init="populateCategorias(); populateSubcategorias();" novalidate>
         <div class="row">
             <div class="col-sm-6">
             
-                <div class="form-group">
+                <div class="form-group" ng-class="{ 'has-error': formRegistroNegocio.nombre.$invalid }">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" ng-model="nombre" name="nombre" id="nombre" placeholder="ej: ¡El mejor lugar en la ciudad!">
+                    <input type="text" class="form-control" ng-model="nombre" name="nombre" id="nombre" placeholder="ej: ¡El mejor lugar en la ciudad!" required>
+                    <div class="help-block" ng-messages="formRegistroNegocio.nombre.$error" ng-if="formRegistroNegocio.nombre.$invalid">
+                        <p ng-message="required">Tienes que ponerle un nombre al lugar.</p>
+                    </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" ng-class="'has-error'">
                     <label for="categoria">Categoria</label><br/>
-                    
                     <label ng-repeat="c in categorias">
-                        <input ng-click="categoriaValue(c.id)" name="categoria" type="radio" value="{{c.id}}" ng-model="$parent.categoria" ng-value="{{c.id}}"/>&nbsp;{{c.nombre}}&nbsp;
+                        <input ng-click="categoriaValue(c.id)" name="categoria" type="radio" value="{{c.id}}" ng-model="$parent.categoria" ng-value="{{c.id}}" required/>&nbsp;{{c.nombre}}&nbsp;
                     </label>
+                    <div class="help-block" ng-messages="formRegistroNegocio.categoria.$error">
+                        <p ng-message="required">Debes de seleccionar una categoria</p>
+                    </div>
                 </div>
 
-                <div class="form-group" ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''">
+                <div class="form-group" ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''" ng-class="'has-error'">
                     <label for="subcategoria">Subcategoria</label><br/>
-                    <label><input name="subcategoria" type="radio" value="0" ng-model="subcategoria">&nbsp;Ninguna&nbsp;</label>
-                    
+                    <label><input name="subcategoria" type="radio" value="0" ng-model="subcategoria" required>&nbsp;Ninguna&nbsp;</label>
                     <label ng-repeat="s in subcategorias | filter: {categoria:{id:filters.categoria}}">
-                        <input name="subcategoria" type="radio" value="{{s.id}}" ng-model="$parent.subcategoria" ng-value="{{s.id}}">&nbsp;{{s.nombre}}&nbsp;
+                        <input name="subcategoria" type="radio" value="{{s.id}}" ng-model="$parent.subcategoria" ng-value="{{s.id}}" required>&nbsp;{{s.nombre}}&nbsp;
                     </label>
+                    <div class="help-block" ng-messages="formRegistroNegocio.subcategoria.$error">
+                        <p ng-message="required">Debes de selecccionar una subcategoria</p>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -39,9 +46,12 @@
                     <input type="text" class="form-control" ng-model="telefono" name="telefono" id="telefono" placeholder="Solo si ofreces servicio a domicilio, reservaciones o información, no es obligatorio.">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" ng-class="{ 'has-error': formRegistroNegocio.direccion.$invalid }">
                     <label for="Direccion">Dirección</label>
-                    <input type="text" class="form-control" ng-model="direccion" name="direccion" id="direccion" placeholder="Dirección">
+                    <input type="text" class="form-control" ng-model="direccion" name="direccion" id="direccion" placeholder="¿Dónde están ubicados?" required>
+                    <div class="help-block" ng-messages="formRegistroNegocio.direccion.$error">
+                        <p ng-message="required">Tienes que ponerle una dirección al lugar.</p>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -83,13 +93,16 @@
             </div>    
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Registra mi negocio</button>
+            <button type="submit" class="btn btn-primary btn-block" ng-disabled="formRegistroNegocio.$invalid">
+                <span ng-visible="formRegistroNegocio.$invalid" ng-hide="!formRegistroNegocio.$invalid">Faltan datos por llenar, no podemos registrar tu lugar</span>
+                <span ng-visible="!formRegistroNegocio.$invalid" ng-hide="formRegistroNegocio.$invalid">Registra mi lugar</span>
+            </button>
         </div>
     </form>
     
     <hr>
     <div id="beneficios">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium deleniti explicabo, beatae fugiat nesciunt? Architecto nulla aperiam facere eos. Facere delectus magni impedit deserunt, placeat aspernatur veniam inventore quaerat corporis!</p>
-        <button class="btn btn-primary" ng-click="goTo('form-registro-negocio')">Quiero registrar mi negocio</button>
+        <button class="btn btn-primary" ng-click="goTo('form-registro-negocio')">Quiero registrar mi lugar</button>
     </div>
 </div>
