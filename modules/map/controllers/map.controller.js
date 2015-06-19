@@ -24,9 +24,10 @@ angular.module('map').controller('MapController', ['$scope', '$document', '$time
                 lugarId: idLugar
             });
             var info_place = angular.element(document.getElementById('info-place'));
+            $(".leaflet-tile").trigger('click');
             $timeout(function(){
                 $document.scrollToElement(info_place, 30, 1000);
-            }, 200)
+            }, 500)
 
         };
 

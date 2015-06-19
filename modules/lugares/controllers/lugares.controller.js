@@ -11,6 +11,7 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
 
         $scope.categoriaValue = function(value){
             $scope.filters.categoria = value;
+            $scope.subcategoria = '';
         }
 
         function getLocationError(msg) {
@@ -95,7 +96,7 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
             var lugar = new Lugares({
                 nombre: this.nombre,
                 categoria: this.categoria,
-                subcategoria: this.subcategoria || null,
+                subcategoria: this.subcategoria,
                 direccion: this.direccion,
                 coordenadas: this.coordenadas,
                 telefono: this.telefono || null,

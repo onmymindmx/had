@@ -4,7 +4,7 @@
             <h2>¿Qué tipo de lugar o actividad estás buscando en {{ city }}?</h2>
             <div id="filtros">
                 <div id="categorias">
-                    <button class="btn btn-green btn-lg btn-filter" ng-click="filters.categoria = ''"> Cualquiera </button>
+                    <button class="btn btn-green btn-lg btn-filter" ng-click="filters.categoria = ''; filters.subcategoria = ''"> Cualquiera </button>
                     <button class="btn btn-green btn-lg btn-filter" ng-repeat="categoria in categorias" ng-click="filters.categoria = categoria.id; filters.subcategoria = ''"> {{ categoria.nombre }} </button> 
                 </div>
                 <hr ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''">
@@ -23,11 +23,50 @@
         <div ng-if="mapReady">
             <mapbox id="mapa" map_id="{{ map_id }}" lat="{{ lat }}" lng="{{ lng }}" zoom="{{ zoomMap }}" >
                 <marker ng-repeat="lugar in lugares | filter: {categoria: {id: filters.categoria}} | filter: {subcategoria: {id:filters.subcategoria}}" lat="{{ lugar.latLng.lat }}" lng="{{ lugar.latLng.lng }}">
-                    <strong ng-bind="lugar.nombre"></strong>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae esse porro quia voluptatibus laborum, laboriosam magnam deleniti ab velit veritatis natus eius aperiam alias repellendus reiciendis enim dolore eos, ullam!</p>
-                    <p>
-                        <a ng-click="obtenerLugar(lugar.id); " class="btn btn-default btn-xs">Más información</a>
-                    </p>
+                    <div>
+                        <span class="text-center"><h3 ng-bind="lugar.nombre"></h3></span>
+                        <h4>{{ lugar.categoria.nombre}} 
+                            <small>{{ lugar.subcategoria.nombre }}</small>
+                        </h4>
+                        
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <strong>Dirección: </strong><span ng-bind="lugar.direccion"></span>        
+                            </div>
+                            <div class="col-sm-6">
+                                <span ng-if="lugar.telefono"><strong>Teléfono: </strong> {{ lugar.telefono }} </span>        
+                            </div>
+                        </div>
+                        
+                        
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quasi, quibusdam, sint, saepe at iste laudantium quam itaque beatae, commodi excepturi nemo. Cupiditate, nam aspernatur quidem voluptatum autem rerum quia.</p>
+                        <div class="text-center row">
+                            <div class="col-sm-3">
+                                <a ng-href="http://www.twitter.com/{{lugar.twitter}}" ng-show="lugar.twitter" target="_blank">
+                                    <i class="fa fa-2x fa-twitter"></i>
+                                </a>     
+                            </div>
+                            <div class="col-sm-3">
+                                <a ng-href="http://www.facebook.com/{{lugar.facebook}}" ng-show="lugar.facebook" target="_blank">
+                                    <i class="fa fa-2x fa-facebook"></i>
+                                </a>     
+                            </div>
+                            <div class="col-sm-3">
+                                <a ng-href="http://www.instagram.com/{{lugar.instagram}}" ng-show="lugar.instagram" target="_blank">
+                                    <i class="fa fa-2x fa-instagram"></i>
+                                </a>    
+                            </div>
+                            <div class="col-sm-3">
+                                <a ng-href="http://{{lugar.website}}" ng-show="lugar.website" target="_blank">
+                                    <i class="fa fa-2x fa-desktop"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="text-center">
+                        <a ng-click="obtenerLugar(lugar.id); " class="btn btn-default btn-xs">Más información</a>    
+                    </div>-->
+                    
                 </marker>
             </mapbox>
         </div>
@@ -42,14 +81,17 @@
         </div>
     </div>
     <div id="info-place" class="container well" ng-show="lugar" ng-hide="!lugar">
-        <h2 ng-bind="lugar.nombre"></h2>
-        <h3> {{lugar.categoria.nombre}} <small ng-bind="lugar.subcategoria.nombre"></small> </h3>
-        <strong ng-bind="lugar.direccion"></strong>
-        <p ng-bind="lugar.telefono"></p>
-        <p><b>Facebook:</b> <span ng-bind="lugar.facebook"></span></p>
-        <p><b>Twitter:</b> <span ng-bind="lugar.twitter"></span></p>
-        <p><b>Instagram:</b> <span ng-bind="lugar.instagram"></span></p>
-        <p><b>Website:</b> <span ng-bind="lugar.website"></span></p>
+        <div ng-if="lugar.$resolved && !lugar.length">
+            <h2 ng-bind="lugar.nombre"></h2>
+            <h3> {{lugar.categoria.nombre}} <small ng-bind="lugar.subcategoria.nombre"></small> </h3>
+            <strong ng-bind="lugar.direccion"></strong>
+            <p ng-bind="lugar.telefono"></p>
+            <p><b>Facebook:</b> <span ng-bind="lugar.facebook"></span></p>
+            <p><b>Twitter:</b> <span ng-bind="lugar.twitter"></span></p>
+            <p><b>Instagram:</b> <span ng-bind="lugar.instagram"></span></p>
+            <p><b>Website:</b> <span ng-bind="lugar.website"></span></p>    
+        </div>
+        
     </div>
     
     <div id="apps" ng-show="mapReady">
@@ -74,7 +116,7 @@
     
     <footer ng-show="mapReady">
         <div class="container">
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-sm-4">
                     <strong>Directorio de lugares</strong>
                     <ul>
@@ -99,7 +141,7 @@
                         <div class="col-xs-4"><i class="fa fa-2x fa-instagram"></i></div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <p>
                     ©2015 On My Mind

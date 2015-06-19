@@ -95,3 +95,7 @@ fieldset[disabled] .btn-green.active {
 .btn-filter {
   margin: 10px;
 }
+
+.leaflet-popup-content {
+  width: 500px !important;
+}

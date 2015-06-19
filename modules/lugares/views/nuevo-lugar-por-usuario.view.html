@@ -32,7 +32,7 @@
 
                 <div class="form-group" ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''" ng-class="'has-error'">
                     <label for="subcategoria">Subcategoria</label><br/>
-                    <label><input name="subcategoria" type="radio" value="0" ng-model="subcategoria" required>&nbsp;Ninguna&nbsp;</label>
+                    <!--<label><input name="subcategoria" type="radio" value="0" ng-model="subcategoria" required>&nbsp;Ninguna&nbsp;</label>-->
                     <label ng-repeat="s in subcategorias | filter: {categoria:{id:filters.categoria}}">
                         <input name="subcategoria" type="radio" value="{{s.id}}" ng-model="$parent.subcategoria" ng-value="{{s.id}}" required>&nbsp;{{s.nombre}}&nbsp;
                     </label>
