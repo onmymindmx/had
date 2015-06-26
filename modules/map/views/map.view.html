@@ -70,9 +70,10 @@
                 </marker>
             </mapbox>
         </div>
-        <div class="container" ng-if="!mapReady" id="mensajes">
+        <div class="text-center loading" ng-if="!mapReady" id="mensajes">
             <div ng-if="!errorLocation">
-                <h1>Cargando...</h1>
+                <h2>Buscando los mejores lugares para ti</h2>
+                <h3>Por favor, espera...</h3>
             </div>
 
             <div ng-if="errorLocation">
@@ -94,7 +95,7 @@
         
     </div>
     
-    <div id="apps" ng-show="mapReady">
+    <!--<div id="apps" ng-show="mapReady">
         <div class="container">
             <div class="col-sm-9">
                 <h4>Encuentra los mejores lugares en {{ city }} desde tu smartphone o table.</h4>
@@ -112,7 +113,7 @@
             </div>
             
         </div>    
-    </div>
+    </div>-->
     
     <footer ng-show="mapReady">
         <div class="container">
@@ -146,9 +147,9 @@
                 <p>
                     ©2015 On My Mind
                 </p>
-                <p>
+                <!--<p>
                     Terminos de servicio | Politicas de privacidad | Contacto | Preguntas y Soporte    
-                </p>
+                </p>-->
                 
             </div>
         </div>

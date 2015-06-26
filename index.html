@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./vendor/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="./vendor/mapbox.js/mapbox.css">
     <link rel="stylesheet" href="./vendor/angularjs-toaster/toaster.css">
+    <link rel="stylesheet" href="./vendor/angular-loading-bar/src/loading-bar.css">
     <link rel="stylesheet" href="./css/had.css">
     <title>¿Hoy a dónde?</title>
 </head>
@@ -26,7 +27,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="!logged()"><a href="#!/signin" ng-bind="'Acceder'"></a></li>
                     <li ng-show="!logged()"><a href="#!/signup" ng-bind="'Registrarse'"></a></li>
-                    <li ng-show="logged()"><a href="#!/nuevo-lugar" ng-bind="'Registra tu negocio'"></a></li>
+                    <li ng-show="logged()"><a href="#!/nuevo-lugar" ng-if="token.countPlaces == 0" ng-bind="'Registra tu negocio'"></a></li>
+                    <li ng-show="logged()">
+                        <a href="#!/mi-lugar" ng-if="token.countPlaces == 1" ng-bind="'Mi lugar'"></a>
+                        <a href="#!/mis-lugares" ng-if="token.countPlaces > 1" ng-bind="'Mis lugares'"></a>
+                    </li>
                     <li ng-show="logged()" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-cloak> 
                             <span ng-if="token.first_name && token.last_name" ng-bind="token.first_name + ' ' + token.last_name"></span>
@@ -35,7 +40,7 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li ng-show="isAdmin()"><a href="#!/dashboard">Dashboard</a></li>
-                            <li><a href="#!/perfil">Perfil</a></li>
+                            <!--<li><a href="#!/perfil">Perfil</a></li>-->
                             <li><a href="#!/" ng-click="logout()">Cerrar sesión</a></li>
                         </ul>
                     </li>
@@ -58,7 +63,7 @@
     <script type="text/javascript" src="./vendor/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="./vendor/angularjs-toaster/toaster.js"></script>
     <script type="text/javascript" src="./vendor/angular-messages/angular-messages.js"></script>
-
+    <script type="text/javascript" src="./vendor/angular-loading-bar/src/loading-bar.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
@@ -92,6 +97,11 @@
     <script type="text/javascript" src="./modules/dashboard/config/dashboard.routes.js"></script>
     <script type="text/javascript" src="./modules/dashboard/controllers/dashboard.controller.js"></script>
     <script type="text/javascript" src="./modules/dashboard/services/dashboard.service.js"></script>  
+
+    <script type="text/javascript" src="./modules/profile/profile.module.js"></script>
+    <script type="text/javascript" src="./modules/profile/config/profile.routes.js"></script>
+    <script type="text/javascript" src="./modules/profile/controllers/profile.controller.js"></script>
+    <script type="text/javascript" src="./modules/profile/services/profile.service.js"></script>
 
 
     </body>

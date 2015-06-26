@@ -1,6 +1,9 @@
 var mainApplicationModuleName = 'had';
 
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource', 'ngRoute', 'satellizer', 'autenticacion', 'map','categoria', 'subcategoria', 'lugar', 'dashboard', 'angular-mapbox', 'duScroll', 'toaster', 'ngAnimate', 'ngMessages']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, 
+    ['ngResource', 'ngRoute', 'satellizer', 'autenticacion', 'map','categoria',
+     'subcategoria', 'lugar', 'dashboard', 'profile', 'angular-mapbox', 'duScroll', 
+     'toaster', 'ngAnimate', 'ngMessages', 'angular-loading-bar']);
 
 mainApplicationModule
     .config(['$locationProvider', '$authProvider',
@@ -33,6 +36,9 @@ mainApplicationModule
             }]);
         }
     ])
+    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = false;
+    }])
     .run( 
          // Funnción para mandar a la página de loggeo si no hay sessión
         function($rootScope, $location, Autenticacion){
