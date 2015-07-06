@@ -5,7 +5,7 @@ angular.module('profile').controller('ProfileController', ['$scope', '$auth', 'L
             var token = $auth.getPayload();
             var lugares = token.user.places;
             $scope.lugares = lugares
-        }
+        };
 
     }
 ]);
