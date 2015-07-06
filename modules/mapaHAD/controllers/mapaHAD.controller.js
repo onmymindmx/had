@@ -6,6 +6,8 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
             subcategoria: ""
         };
 
+        $scope.latlng = '';
+
         $scope.populateCategorias = function(query) {
             Categorias.query(query, function(categorias) {
                 $scope.categorias = categorias
@@ -190,7 +192,7 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
                     }
                 ];
 
-                var latlngS = position.coords.latitude.toString() + ', ' + position.coords.longitude.toString();
+                var latlngS = position.coords.latitude.toString() + ',' + position.coords.longitude.toString();
                 $scope.$apply(function() {
                     $scope.latlng = latlngS;
                     $scope.zoomMap = "15";
@@ -226,7 +228,6 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
             $scope.infoWindow.setContent(
                 '<button id="btn_getInfoPlace" class="btn btn-default btn-xs">Más información</button>'
             );
-            $scope.btn_getInfoPlace = $("#btn_getInfoPlace");
 
             $scope.centerMapAndGetInfo = function(event, p){
                 map.panTo(event.latLng);
@@ -315,16 +316,46 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
 
             }
             var center = new google.maps.LatLng(lat, p.latLng.lng);
-
             $scope.infoWindow.setContent(
                 '<h3>' + p.nombre + '</h3>' +
                 '<h5>' + p.categoria.nombre + '</h5>' +
-                '<button ng-click="hey()" id="btn_getInfoPlace" data-id_place="' + p.id + '" class="btn btn-default btn-xs">Más información</button>'
+                '<button id="btn_getInfoPlace" data-id_place="' + p.id + '" class="btn btn-default btn-xs" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">Más información</button>'
             );
 
             $scope.infoWindow.setPosition(center);
             $scope.infoWindow.open(map);
+            $scope.infoLugar = null;
+
+            var getInfoLugar = Lugares.get({lugarId: p.id}, function(){
+                $scope.infoLugar = getInfoLugar;
+            });
         };
+
+        $scope.irA = function(destino, parametro){
+            switch (destino){
+                case 'direccion':
+                    window.open('https://www.google.com.mx/maps/dir/'+ $scope.latlng +'/' + parametro.toString(), '_blank');
+                    break;
+
+                case 'facebook':
+                    break;
+
+                case 'twitter':
+                    window.open('https://www.twitter.com/' + parametro, '_blank');
+                    break;
+
+                case 'instagram':
+                    if(parametro.substring(0,1) == '@'){
+                        window.open('https://www.instagram.com/' + parametro.substring(1), '_blank');
+                    }
+                    break;
+
+                case 'website':
+                    window.open('http://' + parametro, '_blank');
+                    break;
+            }
+        }
+
 
     }
 ]);

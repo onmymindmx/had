@@ -19,6 +19,58 @@ hr{
   color: #B6B6B6;
 }
 
+.infoElement{
+  height: 100px;
+  text-align: center;
+  padding: 18% 0 20% 0;
+  font-size: 1.2em;
+}
+
+.infoDireccion:hover {
+  background-color: #D93B2B;
+  color: white;
+}
+
+.infoTelefono:hover {
+  background-color: #FDD835;
+  color: white;
+}
+
+.infoFacebook:hover {
+  background-color: #425F9F;
+  color: white;
+}
+
+.infoTwitter:hover {
+  background-color: #50ABF1;
+  color: white;
+}
+
+.infoInstagram:hover {
+  background-color: #4090DB;
+  color: white;
+}
+
+.infoWebsite:hover {
+  background-color: #607D8B;
+  color: white;
+}
+
+.infoDireccion, .infoTelefono, .infoFacebook, .infoTwitter, .infoInstagram, .infoWebsite{
+  -webkit-transition-property: background-color, color;
+  -moz-transition-property: background-color, color;
+  -o-transition-property: background-color, color;
+  -ms-transition-property: background-color, color;
+  transition-property: background-color, color;
+
+  -webkit-transition-duration: 500ms;
+  -moz-transition-duration: 500ms;
+  -o-transition-duration: 500ms;
+  -ms-transition-duration: 500ms;
+  transition-duration: 500ms;
+}
+
+
 .loading{
   position: absolute;
   top: 50%;

@@ -38,4 +38,44 @@
             </div>
         </div>
     </div>
+
+    <div style="width: 500px;" class="navmenu navmenu-default navmenu-fixed-right offcanvas" >
+        <div ng-show="!infoLugar">
+            Obteniendo información...
+        </div>
+        <div ng-show="infoLugar" class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h2> {{ infoLugar.nombre}}</h2>
+                    <h4> {{ infoLugar.categoria.nombre }}</h4>
+                    <h6> {{ infoLugar.subcategoria.nombre }}</h6>
+                </div>
+                <div class="col-xs-6">
+                    <br/>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla blandit sollicitudin sapien et vestibulum. Nunc vestibulum magna pretium sed.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 infoElement infoDireccion" ng-click="irA('direccion', infoLugar.coordenadas)">
+                    <i class="fa fa-map-marker"></i> {{ infoLugar.direccion }}
+                </div>
+                <div ng-show="infoLugar.telefono" class="col-xs-6 infoElement infoTelefono">
+                    <i class="fa fa-phone-square"></i> {{ infoLugar.telefono }}
+                </div>
+                <div ng-show="infoLugar.facebook" class="col-xs-6 infoElement infoFacebook" ng-click="irA('facebook', infoLugar.facebook)">
+                    <i class="fa fa-facebook-official"></i> {{ infoLugar.facebook }}
+                </div>
+                <div ng-show="infoLugar.twitter" class="col-xs-6 infoElement infoTwitter" ng-click="irA('twitter', infoLugar.twitter)">
+                    <i class="fa fa-twitter-square"></i> {{ infoLugar.twitter }}
+                </div>
+                <div ng-show="infoLugar.instagram" class="col-xs-6 infoElement infoInstagram" ng-click="irA('instagram', infoLugar.instagram)">
+                    <i class="fa fa-instagram"></i> {{ infoLugar.instagram }}
+                </div>
+                <div ng-show="infoLugar.website" class="col-xs-6 infoElement infoWebsite" ng-click="irA('website', infoLugar.website)">
+                    <i class="fa fa-globe"></i> {{ infoLugar.website }}
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
