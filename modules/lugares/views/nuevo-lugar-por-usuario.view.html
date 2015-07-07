@@ -41,6 +41,14 @@
                     </div>
                 </div>
 
+                <div class="form-group" ng-class="{ 'has-error': formRegistroNegocio.descripcion.$invalid }">
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" ng-model="descripcion" name="descripcion" id="descripcion" cols="30" rows="3" maxlength="140" placeholder="ej: El mejor lugar que podrás conocer en la ciudad, ¡tienes que visitarnos!" required></textarea>
+                    <div class="help-block" ng-messages="formRegistroNegocio.descripcion.$error">
+                        <p ng-message="required">Tienes que ponerle una descripción al lugar.</p>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="telefono">Teléfono</label>
                     <input type="text" class="form-control" ng-model="telefono" name="telefono" id="telefono" placeholder="Solo si ofreces servicio a domicilio, reservaciones o información, no es obligatorio.">
@@ -60,7 +68,6 @@
                         <div class="input-group-addon">http://www.facebook.com/</div>
                         <input type="text" class="form-control" ng-model="facebook" name="facebook" id="facebook" placeholder="ej: hoyadondemx">    
                     </div>
-                    
                 </div>
 
                 <div class="form-group">
@@ -87,7 +94,7 @@
                 <h4>Ubica tu lugar en el mapa. <small>Arrastrando el puntero rojo</small></h4>
                 <div ng-init="createMap();">
                     <input type="text" class="form-control" ng-model="coordenadas" name="coordenadas" id="coordenadas" style="display:none;">
-                    <div id="map-canvas" style="height:600px; width:100%; "></div>    
+                    <div id="map-canvas" style="height:715px; width:100%; "></div>
                 </div>
                 <br/>
             </div>    

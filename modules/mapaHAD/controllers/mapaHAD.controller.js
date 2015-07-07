@@ -1,5 +1,5 @@
-angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'Lugares', 'Categorias', 'Subcategorias',
-    function($scope, $auth, Lugares, Categorias, Subcategorias){
+angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'Lugares', 'Categorias', 'Subcategorias', 'googleStyle',
+    function($scope, $auth, Lugares, Categorias, Subcategorias, googleStyle){
 
         $scope.filters = {
             categoria: "",
@@ -42,161 +42,11 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
                     }
                 });
 
-                var style = [
-                    {
-                        "featureType": "all",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "simplified"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative.neighborhood",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "color": "#f3f4f4"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape.man_made",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "weight": 0.9
-                            },
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.attraction",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.business",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.government",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.medical",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "simplified"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "color": "#83cead"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.place_of_worship",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.school",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi.sports_complex",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "labels",
-                        "stylers": [
-                            {
-                                "visibility": "simplified"
-                            },
-                            {
-                                "color": "#2c7fa9"
-                            }
-                        ]
-                    }
-                ];
-
                 var latlngS = position.coords.latitude.toString() + ',' + position.coords.longitude.toString();
                 $scope.$apply(function() {
                     $scope.latlng = latlngS;
                     $scope.zoomMap = "15";
-                    $scope.style = style;
+                    $scope.style = googleStyle.style;
                     $scope.mapReady = true;
                     $scope.lugares = Lugares.query();
                     $scope.errorLocation = false;
@@ -318,7 +168,8 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
             var center = new google.maps.LatLng(lat, p.latLng.lng);
             $scope.infoWindow.setContent(
                 '<h3>' + p.nombre + '</h3>' +
-                '<h5>' + p.categoria.nombre + '</h5>' +
+                '<h5>' + p.categoria.nombre + ' <small>' + p.subcategoria.nombre + '</small></h5>' +
+                '<p>' + p.direccion + '</p>' +
                 '<button id="btn_getInfoPlace" data-id_place="' + p.id + '" class="btn btn-default btn-xs" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">Más información</button>'
             );
 

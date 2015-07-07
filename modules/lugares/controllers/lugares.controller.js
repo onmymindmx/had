@@ -1,5 +1,5 @@
-angular.module('lugar').controller('LugaresController', ['$scope', '$document', '$timeout', '$routeParams', '$location', 'Categorias', 'Subcategorias', 'Lugares', 'toaster',
-    function($scope, $document, $timeout, $routeParams, $location, Categorias, Subcategorias, Lugares, toaster) {
+angular.module('lugar').controller('LugaresController', ['$scope', '$document', '$timeout', '$routeParams', '$location', 'Categorias', 'Subcategorias', 'Lugares', 'toaster', 'googleStyle',
+    function($scope, $document, $timeout, $routeParams, $location, Categorias, Subcategorias, Lugares, toaster, googleStyle) {
 
         $scope.filters = {
             categoria:''
@@ -7,12 +7,12 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
         $scope.goTo = function(seccion){
             var seccionDom = angular.element(document.getElementById(seccion));
             $document.scrollToElement(seccionDom, 30, 1000);
-        }
+        };
 
         $scope.categoriaValue = function(value){
             $scope.filters.categoria = value;
             $scope.subcategoria = '';
-        }
+        };
 
         function getLocationError(msg) {
             console.log(position);
@@ -22,13 +22,13 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
             Categorias.query(query, function(categorias) {
                 $scope.categorias = categorias;
             })
-        }
+        };
 
         $scope.populateSubcategorias = function(query) {
             Subcategorias.query(query, function(subcategorias) {
                 $scope.subcategorias = subcategorias;
             })
-        } 
+        };
 
         $scope.createMap = function() {
             if(navigator.geolocation) {
@@ -54,6 +54,7 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
                     }
                     
                     var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+                    map.setOptions({styles: googleStyle.style});
                     var marker = new google.maps.Marker({
                         draggable: true,
                         map: map,
@@ -73,7 +74,7 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
             } else {
                 error('no soportado');
             }
-        }
+        };
 
         $scope.subcategorias = function() {
             $scope.subcategorias = Subcategorias.query();
@@ -99,6 +100,7 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
                 subcategoria: this.subcategoria,
                 direccion: this.direccion,
                 coordenadas: this.coordenadas,
+                descripcion: this.descripcion,
                 telefono: this.telefono || null,
                 facebook: this.facebook || null,
                 twitter: this.twitter || null,
