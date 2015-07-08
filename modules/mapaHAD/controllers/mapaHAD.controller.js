@@ -189,15 +189,22 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
                     break;
 
                 case 'facebook':
+                    window.open('https://wwww.facebook.com' + parametro, '_blank');
                     break;
 
                 case 'twitter':
-                    window.open('https://www.twitter.com/' + parametro, '_blank');
+                    if(parametro.substring(0,1) == '@') {
+                        window.open('https://www.twitter.com/' + parametro, '_blank');
+                    } else {
+                        window.open('https://www.twitter.com' + parametro, '_blank');
+                    }
                     break;
 
                 case 'instagram':
                     if(parametro.substring(0,1) == '@'){
                         window.open('https://www.instagram.com/' + parametro.substring(1), '_blank');
+                    } else {
+                        window.open('https://www.instagram.com' + parametro, '_blank');
                     }
                     break;
 
