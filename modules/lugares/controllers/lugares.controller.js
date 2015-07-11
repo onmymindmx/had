@@ -85,8 +85,14 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
         };
 
         $scope.findOne = function() {
-            $scope.lugar = Lugares.get({
+            Lugares.get({
                 lugarId: $routeParams.lugarId
+            }).$promise.then(function(response){
+                $scope.lugar = response;
+                // ponemos el filtro para mostrar la subcategorias
+                $scope.filters.categoria = response.categoria.id;
+                // Creamos el mapa
+                $scope.createMap();
             });
         };
 
@@ -118,12 +124,18 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
 
         $scope.update = function() {
             var lugar = $scope.lugar;
-            lugar.categoria = lugar.categoria;
-            lugar.subcategoria = lugar.subcategoria;
+            lugar.categoria = lugar.categoria.id;
+            lugar.subcategoria = lugar.subcategoria.id;
             lugar.$update(function(response) {
-                console.log(response)
+                if(response.status == "error"){
+                    toaster.pop('error', "Error al actualizar el lugar");
+                } else {
+                    toaster.pop('success', "Lugar actualizado con éxito", "¡El lugar se actualizó con éxito");
+                }
+                $scope.findOne();
+
             }, function(errorResponse) {
-                console.error('Error');
+                toaster.pop('error', "Error", "Algo salio mal de nuestro lado");
             });
         };
 

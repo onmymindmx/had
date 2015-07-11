@@ -27,10 +27,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="!logged()"><a href="#!/signin" ng-bind="'Acceder'"></a></li>
                     <li ng-show="!logged()"><a href="#!/signup" ng-bind="'Registrarse'"></a></li>
-                    <li ng-show="logged()"><a href="#!/nuevo-lugar" ng-if="token.countPlaces == 0" ng-bind="'Registra tu negocio'"></a></li>
+                    <li ng-show="logged()"><a href="#!/nuevo-lugar" ng-if="token.countPlaces == 0 || isAdmin()" ng-bind="'Registra tu negocio'"></a></li>
                     <li ng-show="logged()">
-                        <a href="#!/mi-lugar" ng-if="token.countPlaces == 1" ng-bind="'Mi lugar'"></a>
-                        <a href="#!/mis-lugares" ng-if="token.countPlaces > 1" ng-bind="'Mis lugares'"></a>
+                        <a href="#!/mis-lugares" ng-if="token.countPlaces > 0" ng-bind="'Mis lugares'"></a>
                     </li>
                     <li ng-show="logged()" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-cloak> 
@@ -40,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li ng-show="isAdmin()"><a href="#!/dashboard">Dashboard</a></li>
-                            <!--<li><a href="#!/perfil">Perfil</a></li>-->
+                            <li><a href="#!/perfil">Perfil</a></li>
                             <li><a href="#!/" ng-click="logout()">Cerrar sesión</a></li>
                         </ul>
                     </li>
@@ -101,6 +100,9 @@
 
     <script type="text/javascript" src="./modules/profile/profile.module.js"></script>
     <script type="text/javascript" src="./modules/profile/config/profile.routes.js"></script>
+    <script type="text/javascript" src="./modules/profile/services/mis_lugares.service.js"></script>
+    <script type="text/javascript" src="./modules/profile/services/profile.service.js"></script>
+    <script type="text/javascript" src="./modules/profile/controllers/mis_lugares.controller.js"></script>
     <script type="text/javascript" src="./modules/profile/controllers/profile.controller.js"></script>
 
 
