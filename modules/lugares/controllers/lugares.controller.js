@@ -76,6 +76,23 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
             }
         };
 
+        $scope.seleccionarCategoria = function(idCategoria){
+            var inputCategoria = document.getElementById('categoria');
+            inputCategoria.value = idCategoria;
+            angular.element(inputCategoria).triggerHandler('input');
+            $scope.filters.categoria = idCategoria;
+
+            var inputSubcategoria = document.getElementById('subcategoria');
+            inputSubcategoria.value = '';
+            angular.element(inputSubcategoria).triggerHandler('input');
+        };
+
+        $scope.seleccionarSubcategoria = function(idSubcategoria){
+            var inputSubcategoria = document.getElementById('subcategoria');
+            inputSubcategoria.value = idSubcategoria;
+            angular.element(inputSubcategoria).triggerHandler('input');
+        };
+
         $scope.subcategorias = function() {
             $scope.subcategorias = Subcategorias.query();
         };
@@ -115,10 +132,15 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
             });
 
             lugar.$save(function(response) {
-                $location.path('/');
-                toaster.pop('success', "Lugar agregado con éxito", "¡El lugar se agregó con éxito!");
+                if(response.status == "error"){
+                    toaster.pop('error', "Error al crear el lugar");
+                } else {
+                    $location.path('/');
+                    toaster.pop('success', "Lugar agregado con éxito", "¡El lugar se agregó con éxito!");
+                }
+
             }, function(errorResponse) {
-                console.error('Error');
+                toaster.pop('error', "Error", "Algo salió mal de nuestro lado.");
             });
         };
 
@@ -135,7 +157,7 @@ angular.module('lugar').controller('LugaresController', ['$scope', '$document', 
                 $scope.findOne();
 
             }, function(errorResponse) {
-                toaster.pop('error', "Error", "Algo salio mal de nuestro lado");
+                toaster.pop('error', "Error", "Algo salió mal de nuestro lado");
             });
         };
 

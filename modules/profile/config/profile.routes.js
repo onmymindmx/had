@@ -16,7 +16,7 @@ angular.module('profile').config(['$routeProvider',
                 }
             })
             .when('/mis-lugares/editar-lugar/:lugarId', {
-                templateUrl: '/modules/profile/views/editar-mi-lugar.view.html',
+                templateUrl: '/modules/lugares/views/editar-lugar.view.html',
                 access: {
                     requiredLogin: true,
                     userShouldBeAdmin: false

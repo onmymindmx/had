@@ -30,7 +30,7 @@ angular.module('lugar').config(['$routeProvider',
                 }
             })
             .when('/nuevo-lugar', {
-                templateUrl: '/modules/lugares/views/nuevo-lugar-por-usuario.view.html',
+                templateUrl: '/modules/lugares/views/crear-lugar.view.html',
                 access: {
                     requiredLogin: true,
                     userShouldBeAdmin: false

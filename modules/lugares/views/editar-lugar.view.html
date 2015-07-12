@@ -1,72 +1,106 @@
 <div class="container" ng-controller="LugaresController" ng-init="findOne()">
+    <h2>Editar lugar</h2>
 
-    <ol class="breadcrumb">
-        <li><a href="#!/dashboard">Dashboard</a></li>
-        <li><a href="#!/dashboard/lugares">lugares</a></li>
-        <li><a ng-href="#!/dashboard/lugares/{{lugar.id}}" ng-bind="lugar.nombre"></a></li>
-        <li class="active">Editar</li>
-    </ol>
+    <form id="formUpdateLugar" ng-submit="update()" name="formUpdateLugar" ng-init="populateCategorias(); populateSubcategorias();" novalidate>
+        <div class="row">
+            <div class="col-sm-6">
 
-    <h2>Editar lugar: {{lugar.nombre}}</h2>
+                <div class="form-group" ng-class="{ 'has-error': formUpdateLugar.nombre.$invalid }">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" ng-model="lugar.nombre" name="nombre" id="nombre" required/>
+                    <div class="help-block" ng-messages="formUpdateLugar.nombre.$error" ng-if="formUpdateLugar.nombre.$invalid">
+                        <p ng-message="required">Tienes que ponerle un nombre al lugar.</p>
+                    </div>
+                </div>
 
-    <form ng-submit="update()" ng-init="populateCategorias(); populateSubcategorias();" novalidate>
+                <div class="form-group" ng-class="{ 'has-error': formUpdateLugar.categoria.$invalid }">
+                    <label for="categoria">Categoria</label>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-4" ng-repeat="categoria in categorias" ng-click="lugar.categoria.id = categoria.id; filters.categoria = categoria.id">
+                                {{ categoria.nombre }}
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" ng-model="lugar.categoria.id" name="categoria" id="categoria" required/>
+                    <div class="help-block" ng-messages="formUpdateLugar.categoria.$error">
+                        <p ng-message="required">Debes de seleccionar un categoria</p>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" ng-model="lugar.nombre" name="nombre" id="nombre" placeholder="Nombre">
+                <div class="form-group" ng-class="{ 'has-error': formUpdateLugar.subcategoria.$invalid}" ng-show="filters.categoria != ''">
+                    <label for="categoria">Subcategoria</label>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-4" ng-repeat="subcategoria in subcategorias | filter: {categoria:{id:filters.categoria}} " ng-click="lugar.subcategoria.id = subcategoria.id"> {{ subcategoria.nombre }}</div>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" ng-model="lugar.subcategoria.id" name="subcategoria" id="subcategoria"/>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': formRegistroNegocio.descripcion.$invalid }">
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" ng-model="lugar.descripcion" name="descripcion" id="descripcion" cols="30" rows="3" maxlength="140" placeholder="ej: El mejor lugar que podrás conocer en la ciudad, ¡tienes que visitarnos!" required></textarea>
+                    <div class="help-block" ng-messages="formRegistroNegocio.descripcion.$error">
+                        <p ng-message="required">Tienes que ponerle una descripción al lugar.</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" class="form-control" ng-model="lugar.telefono" name="telefono" id="telefono" placeholder="Solo si ofreces servicio a domicilio, reservaciones o información, no es obligatorio.">
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': formRegistroNegocio.direccion.$invalid }">
+                    <label for="Direccion">Dirección</label>
+                    <input type="text" class="form-control" ng-model="lugar.direccion" name="direccion" id="direccion" placeholder="¿Dónde están ubicados?" required>
+                    <div class="help-block" ng-messages="formRegistroNegocio.direccion.$error">
+                        <p ng-message="required">Tienes que ponerle una dirección al lugar.</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="facebook">Facebook</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">http://www.facebook.com/</div>
+                        <input type="text" class="form-control" ng-model="lugar.facebook" name="facebook" id="facebook" placeholder="ej: hoyadondemx">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="twitter">Twitter</label>
+                    <input type="text" class="form-control" ng-model="lugar.twitter" name="twitter" id="twitter" placeholder="ej: @hoyadondemx">
+                </div>
+
+                <div class="form-group">
+                    <label for="instagram">Instagram</label>
+                    <input type="text" class="form-control" ng-model="lugar.instagram" name="instagram" id="instagram" placeholder="ej: @hoyadondemx">
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Website</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">http://</div>
+                        <input type="text" class="form-control" ng-model="lugar.website" name="website" id="website" placeholder="ej: www.hoyadonde.mx">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <h4>Ubica tu lugar en el mapa. <small>Arrastrando el puntero rojo</small></h4>
+                <div>
+                    <input type="text" class="form-control" ng-model="lugar.coordenadas" name="coordenadas" id="coordenadas" style="display:none;">
+                    <div id="map-canvas" style="height:715px; width:100%; "></div>
+                </div>
+                <br/>
+            </div>
         </div>
-
         <div class="form-group">
-            <label for="categoria">Categoria</label>
-            <select ng-model="lugar.categoria" ng-options="c.nombre for c in categorias track by c.id" name="categoria" id="categoria" class="form-control">
-                <option value="">Seleccione una categoria</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="subcategoria">Subcategoria</label>
-            <select name="subcategoria" id="subcategoria" ng-model="lugar.subcategoria" ng-options="s.nombre for s in subcategorias track by s.id" class="form-control">
-                <option value="">Seleccione una subcategoria</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="text" class="form-control" ng-model="lugar.telefono" name="telefono" id="telefono" placeholder="Teléfono">
-        </div>
-
-        <div class="form-group">
-            <label for="Direccion">Dirección</label>
-            <input type="text" class="form-control" ng-model="lugar.direccion" name="direccion" id="direccion" placeholder="Dirección">
-        </div>
-
-        <div class="form-group">
-            <label for="facebook">Facebook</label>
-            <input type="text" class="form-control" ng-model="lugar.facebook" name="facebook" id="facebook" placeholder="Facebook">
-        </div>
-
-        <div class="form-group">
-            <label for="twitter">Twitter</label>
-            <input type="text" class="form-control" ng-model="lugar.twitter" name="twitter" id="twitter" placeholder="Twitter">
-        </div>
-
-        <div class="form-group">
-            <label for="instagram">Instagram</label>
-            <input type="text" class="form-control" ng-model="lugar.instagram" name="instagram" id="instagram" placeholder="Instagram">
-        </div>
-
-        <div class="form-group">
-            <label for="website">Website</label>
-            <input type="text" class="form-control" ng-model="lugar.website" name="website" id="website" placeholder="Website">
-        </div>
-
-        <div ng-init="createMap();">
-            <input type="text" class="form-control" ng-model="lugar.coordenadas" name="coordenadas" id="coordenadas" style="display:none;">
-            <div id="map-canvas" style="height:500px; width:500px; "></div>
-        </div>
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-default">Guardar</button>
+            <button type="submit" class="btn btn-primary btn-block" ng-disabled="formUpdateLugar.$invalid">
+                <span ng-visible="formUpdateLugar.$invalid" ng-hide="!formUpdateLugar.$invalid">Faltan dato por llenar, no podemos actualizar tu lugar</span>
+                <span ng-visibel="!formUpdateLugar.$invalid" ng-hide="formUpdateLugar.$invalid">Actualizar mi lugar</span>
+            </button>
         </div>
     </form>
 </div>
