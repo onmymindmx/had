@@ -20,6 +20,12 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
             });
         };
 
+        $scope.populateLugares = function(query) {
+            Lugares.query(query, function(lugares) {
+                $scope.lugares = lugares;
+            })
+        };
+
         $scope.map = function() {
             $scope.city = "";
 
@@ -48,7 +54,9 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
                     $scope.zoomMap = "15";
                     $scope.style = googleStyle.style;
                     $scope.mapReady = true;
-                    $scope.lugares = Lugares.query();
+                    Lugares.query({coords: latlngS}, function(lugares){
+                        $scope.lugares = lugares;
+                    });
                     $scope.errorLocation = false;
                 })
             }
@@ -166,10 +174,18 @@ angular.module('mapaHAD').controller('MapaHADController', ['$scope', '$auth', 'L
 
             }
             var center = new google.maps.LatLng(lat, p.latLng.lng);
+            if (p.distancia >= 1000){
+                p.distancia = p.distancia/1000;
+                p.distancia = p.distancia.toFixed(2);
+                p.distancia = p.distancia + 'km';
+            } else {
+                p.distancia = parseInt(p.distancia) + 'm';
+            }
             $scope.infoWindow.setContent(
                 '<h3>' + p.nombre + '</h3>' +
                 '<h5>' + p.categoria.nombre + ' <small>' + p.subcategoria.nombre + '</small></h5>' +
                 '<p>' + p.direccion + '</p>' +
+                '<p> a ' + p.distancia + ' de tí </p>' +
                 '<button id="btn_getInfoPlace" data-id_place="' + p.id + '" class="btn btn-default btn-xs" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">Más información</button>'
             );
 
