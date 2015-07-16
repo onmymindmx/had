@@ -1,9 +1,34 @@
 html,
 body {
   background-color: #eee;
+  padding-top: 40px;
 }
 .md-tab {
   background-color: #fafafa;
+}
+.md-card {
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  padding: 10px 20px 10px 10px;
+}
+.md-alert {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  color: #fff;
+  padding: 10px;
+}
+.md-alert-error {
+  background-color: #ef5350;
+}
+.md-alert-info {
+  background-color: #42a5f5;
+}
+.md-alert-success {
+  background-color: #66bb6a;
+  color: #000;
+}
+.md-alert-warning {
+  background-color: #ffee58;
+  color: #000;
 }
 .btn-filter {
   margin: 10px;
