@@ -1,53 +1,61 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6 md-card">
             <div ng-controller="AutenticacionController">
-                <form name="registroForm" ng-submit="signup()" class="form-signin">
+                <form name="registroForm" ng-submit="signup()">
                     <h2>Registro</h2>
-                    <div class="alert alert-danger" role="alert" ng-show="error">
+                    <div class="md-alert md-alert-error" role="alert" ng-show="error">
                         {{ error }}
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': registroForm.email.$touched && registroForm.email.$invalid }">
-                        <label for="email">Correo electrónico</label>
-                        <input ng-model="email" name="email" type="email" id="email" class="form-control" placeholder="Tu correo electrónico" required autofocus>
-                        <div class="help-block" ng-messages="registroForm.email.$error" ng-show="registroForm.email.$touched">
+
+                    <md-input-container>
+                        <label>Correo electrónico</label>
+                        <input ng-model="email" name="email" type="email" id="email" required autofocus/>
+                        <div ng-messages="registroForm.email.$error" ng-show="registroForm.email.$touched">
                             <p ng-message="required">Necesitas proporcionar un email</p>
                             <p ng-message="email">Necesitas proporcionar un email válido</p>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="username">Nombre de usuario</label>
-                        <input type="text" ng-model="username" id="username" class="form-control" placeholder="Tu nombre de usuario" required>    
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Nombre de usuario</label>
+                        <input ng-model="username" name="username" type="text" id="username"/>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Contraseña</label>
+                        <input ng-model="password" name="password" type="password" id="password" required/>
+                        <div ng-messages="registroForm.password.$error" ng-show="registroForm.password.$touched">
+                            <div ng-message="required">Ncesitas introducir una contraseña</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Nombre</label>
+                        <input ng-model="first_name" type="text" id="first_name" name="first_name">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label >Apellido</label>
+                        <input ng-model="last_name" type="text" id="last_name">
+                    </md-input-container>
+
+                    <md-checkbox ng-model="terminos">
+                        Acepto los términos y condiciones de ¿Hoy a dónde?
+                    </md-checkbox>
+
+                    <md-checkbox ng-model="boletin">
+                        Deseo suscribirme al boletín de ¿Hoy a dónde?. No te mandaremos spam, igual nosotros lo odiamos y puedes desuscribirte del boletín cuando quieras.
+                    </md-checkbox>
+
+                    <div class="text-center">
+                        <md-button class="btn-block md-raised md-cornered" type="submit" ng-disabled="registroForm.$invalid || terminos != true">
+                            <span ng-show="registroForm.$invalid">Te faltan datos por llenar para poder registrarte</span>
+                            <span ng-show="!registroForm.$invalid && terminos != true">Te falta aceptar los términos y condiciones</span>
+                            <span ng-show="!registroForm.$invalid && terminos == true">Registrarse</span>
+                        </md-button>
                     </div>
 
-                    <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        <input ng-model="password" type="password" id="password" class="form-control" placeholder="La contraseña de tu nueva cuenta" required>    
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input ng-model="first_name" type="text" id="nombre" class="form-control" placeholder="Tu nombre">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="apellido">Apellido</label>
-                        <input ng-model="last_name" type="text" id="nombre" class="form-control" placeholder="Tu Apellido">
-                    </div>
-
-                    <div class="checkbox">
-                        <label>
-                            <input ng-model="terminos" type="checkbox"> Acepto los términos y condiciones de ¿Hoy a dónde?
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input ng-model="boletin" type="checkbox"> Deseo suscribirme al boletín de ¿Hoy a dónde?. No te mandaremos spam, igual nosotros lo odiamos y puedes desuscribirte del boletín cuando quieras.
-                        </label>
-                    </div>
-                    
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="registroForm.$invalid">Registrarse</button>
                 </form>
 
                 
@@ -124,6 +132,7 @@
             
         </div>
     </div>
+    <br/>
     <div class="text-center">
         ¿Hoy a dónde? es un producto de <a href="http://www.onmymind.com.mx">On My Mind</a>
     </div>
