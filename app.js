@@ -3,7 +3,7 @@ var mainApplicationModuleName = 'had';
 var mainApplicationModule = angular.module(mainApplicationModuleName, 
     ['ngResource', 'ngRoute', 'satellizer', 'autenticacion', 'mapaHAD','categoria',
      'subcategoria', 'lugar', 'dashboard', 'profile', 'duScroll',
-     'ngAria', 'ngMaterial',
+     'ngAria', 'ngMaterial', 'ngMask',
      'toaster', 'ngAnimate', 'ngMessages', 'angular-loading-bar', 'ngMap']);
 
 var style = [
