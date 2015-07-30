@@ -1,6 +1,6 @@
 angular.module('lugar').factory('Lugares', ['$resource', 'url',
     function($resource, url) {
-        return $resource(url.APIHeroku + '/lugares/:lugarId', {
+        return $resource(url.API + '/lugares/:lugarId', {
             lugarId: '@id'
         }, {
             update: {

@@ -161,8 +161,8 @@ mainApplicationModule
             $locationProvider.hashPrefix('!');
 
             // Parametros de configuración para la autenticacion
-            $authProvider.loginUrl = 'https://apihoyadonde.herokuapp.com/login';
-            $authProvider.signupUrl = 'https://apihoyadonde.herokuapp.com/signup';
+            $authProvider.loginUrl = 'http://api.hoyadonde.omm/login';
+            $authProvider.signupUrl = 'http://api.hoyadonde.omm/signup';
             $authProvider.tokenName = "token";
             $authProvider.tokenPrefix = "had";
         }
