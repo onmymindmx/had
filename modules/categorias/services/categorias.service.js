@@ -1,6 +1,6 @@
 angular.module('categoria').factory('Categorias', ['$resource', 'url',
     function($resource, url) {
-        return $resource(url.API + '/categorias/:categoriaId', {
+        return $resource(url.APIHeroku + '/categorias/:categoriaId', {
             categoriaId: '@id'
         }, {
             update: {
