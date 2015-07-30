@@ -1,0 +1,39 @@
+<div ng-controller="MisLugaresController">
+    <div class="container">
+        <h1>Mis lugares</h1>
+        <hr/>
+
+        <div ng-repeat="lugar in lugares" class="col-xs-12 col-sm-6">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h2>{{ lugar.nombre }}</h2>
+                    <h4>{{ lugar.categoria.nombre }} <small> {{ lugar.subcategoria.nombre }} </small></h4>
+                </div>
+                <a ng-href="#!/mis-lugares/editar-lugar/{{lugar.id}}">
+                    <div class="panel-footer">
+                        <span class="pull-left">Editar</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div ng-show="lugares.length == 1" class="col-xs-12 col-sm-6">
+            <div class="panel" style="border: 1px solid #ddd; border-radius: 5px;">
+                <div class="panel-heading">
+                    <h2>¿Quieres registrar mas lugares?</h2>
+                    <h4>Conoce los beneficios de ser un usario premium</h4>
+                </div>
+                <a ng-href="#!/premium">
+                    <div class="panel-footer">
+                        <span class="pull-left">Quiero ser usuario premium</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

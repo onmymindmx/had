@@ -1,0 +1,81 @@
+<div ng-controller="MapaHADController">
+
+    <div ng-if="mapReady" ng-show="mapReady" class="container well" id="filters-section" ng-init="populateCategorias()">
+        <div ng-show="mapReady">
+            <h2>¿Qué tipo de lugar o actividad estás buscando en {{ city }}?</h2>
+            <div id="filtros">
+                <div id="categorias">
+                    <button class="btn btn-green btn-lg btn-filter" ng-click="filters.categoria = ''; filters.subcategoria = ''"> Cualquiera </button>
+                    <button class="btn btn-green btn-lg btn-filter" ng-repeat="categoria in categorias" ng-click="filters.categoria = categoria.id; filters.subcategoria = ''"> {{ categoria.nombre }} </button>
+                </div>
+                <hr ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''">
+                <div id="subcategorias" ng-show="filters.categoria != ''" ng-hide="filters.categoria == ''" ng-init="populateSubcategorias()">
+                    <h3>¿Algo mas específico?</h3>
+                    <button class="btn btn-green btn-sm btn-filter" ng-click="filters.subcategoria = ''"> Todos </button>
+                    <button class="btn btn-green btn-sm btn-filter" ng-repeat="subcategoria in subcategorias | filter: {categoria: {id:filters.categoria}}" ng-click="filters.subcategoria = subcategoria.id"> {{subcategoria.nombre}} </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div ng-init="map()">
+        <div ng-if="mapReady">
+            <map center="{{ latlng }}" zoom=" {{ zoomMap }}" styles="{{style}}" id="mapa-princial" disable-default-u-i="true" zoom-control="true" scrollwheel="false">
+                <marker ng-repeat="lugar in lugares | filter: {categoria: {id: filters.categoria}} | filter: {subcategoria: {id:filters.subcategoria}}" position="{{ lugar.coordenadas }}" on-click="centerMapAndGetInfo(event, lugar)"></marker>
+            </map>
+        </div>
+
+        <div class="text-center loading" ng-if="!mapReady" id="mensajes">
+            <div ng-if="!errorLocation">
+                <h2>Buscando los mejores lugares para ti</h2>
+                <h3>Por favor, espera...</h3>
+            </div>
+
+            <div ng-if="errorLocation">
+                <h1>No pudimos </h1>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: 500px;" class="navmenu navmenu-default navmenu-fixed-right offcanvas" >
+        <div ng-show="!infoLugar">
+            Obteniendo información...
+        </div>
+        <div ng-show="infoLugar" class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h2> {{ infoLugar.nombre}}</h2>
+                    <h4> {{ infoLugar.categoria.nombre }}</h4>
+                    <h6> {{ infoLugar.subcategoria.nombre }}</h6>
+                </div>
+                <div class="col-xs-6">
+                    <br/>
+                    <p> {{ infoLugar.descripcion }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 infoElement infoDireccion" ng-click="irA('direccion', infoLugar.coordenadas)">
+                    <i class="fa fa-map-marker"></i> {{ infoLugar.direccion }}
+                </div>
+                <div ng-show="infoLugar.telefono" class="col-xs-6 infoElement infoTelefono">
+                    <i class="fa fa-phone-square"></i> {{ infoLugar.telefono }}
+                </div>
+                <div ng-show="infoLugar.facebook" class="col-xs-6 infoElement infoFacebook" ng-click="irA('facebook', infoLugar.facebook)">
+                    <i class="fa fa-facebook-official"></i> {{ infoLugar.facebook }}
+                </div>
+                <div ng-show="infoLugar.twitter" class="col-xs-6 infoElement infoTwitter" ng-click="irA('twitter', infoLugar.twitter)">
+                    <i class="fa fa-twitter-square"></i> {{ infoLugar.twitter }}
+                </div>
+                <div ng-show="infoLugar.instagram" class="col-xs-6 infoElement infoInstagram" ng-click="irA('instagram', infoLugar.instagram)">
+                    <i class="fa fa-instagram"></i> {{ infoLugar.instagram }}
+                </div>
+                <div ng-show="infoLugar.website" class="col-xs-6 infoElement infoWebsite" ng-click="irA('website', infoLugar.website)">
+                    <i class="fa fa-globe"></i> {{ infoLugar.website }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

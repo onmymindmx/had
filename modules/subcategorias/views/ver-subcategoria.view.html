@@ -1,0 +1,12 @@
+<div class="container" ng-controller="SubcategoriasController" ng-init="findOne()">
+    
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/dashboard/subcategorias">Subcategorias</a></li>
+        <li class="active" ng-bind="subcategoria.nombre"></li>
+    </ol>
+
+    <h1 ng-bind="subcategoria.nombre"></h1>
+    <h3 ng-bind="subcategoria.categoria.nombre"></h3>
+    <p ng-bind="subcategoria.descripcion"></p>
+</div>

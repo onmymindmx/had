@@ -1,0 +1,13 @@
+<div class="container" ng-controller="LugaresController" ng-init="findOne()">
+    
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/dashboard/lugares">Lugares</a></li>
+        <li class="active" ng-bind="lugar.nombre"></li>
+    </ol>
+
+    <h1 ng-bind="lugar.nombre"></h1>
+    <h3 ng-bind="lugar.categoria.nombre"></h3>
+    <h5 ng-bind="lugar.subcategoria.nombre"></h5>
+
+</div>

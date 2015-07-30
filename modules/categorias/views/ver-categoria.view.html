@@ -1,0 +1,11 @@
+<div class="container" ng-controller="CategoriasController" ng-init="findOne()">
+    
+    <ol class="breadcrumb">
+        <li><a href="#!/dashboard">Dashboard</a></li>
+        <li><a href="#!/dashboard/categorias">Categorias</a></li>
+        <li class="active" ng-bind="categoria.nombre"></li>
+    </ol>
+
+    <h1 ng-bind="categoria.nombre"></h1>
+    <p ng-bind="categoria.descripcion"></p>
+</div>
