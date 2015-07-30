@@ -3,7 +3,7 @@ angular.module('profile').factory('Perfil', ['$http', 'url',
         var Perfil = {
             getPerfil: function() {
                 // $http returns a promise, which has a then a function which also returns a promise
-                var promise = $http.get(url.API + '/mi-perfil').then(function(response) {
+                var promise = $http.get(url.APIHeroku + '/mi-perfil').then(function(response) {
                     // The return value gets picked up by the then in the controller.
                     return response.data;
                 });
