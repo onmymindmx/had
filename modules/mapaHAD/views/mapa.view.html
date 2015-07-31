@@ -18,6 +18,7 @@
                                 ng-show="filters.categoria != ''"
                                 ng-click="filters.subcategoria = ''"
                                 class="md-raised md-cornered"
+                                ng-class="{'md-primary' : filters.subcategoria == ''}"
                                 >
                             Cualquiera
                         </md-button>
@@ -26,6 +27,7 @@
                                 ng-repeat="subcategoria in subcategorias | filter: {categoria: {id:filters.categoria}}"
                                 ng-click="filters.subcategoria = subcategoria.id"
                                 class="md-raised md-cornered"
+                                ng-class="{'md-primary' : filters.subcategoria == subcategoria.id}"
                                 >
                             {{ subcategoria.nombre }}
                         </md-button>
