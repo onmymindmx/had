@@ -24,11 +24,9 @@ body {
 }
 .md-alert-success {
   background-color: #66bb6a;
-  color: #000;
 }
 .md-alert-warning {
   background-color: #ffee58;
-  color: #000;
 }
 .btn-filter {
   margin: 10px;

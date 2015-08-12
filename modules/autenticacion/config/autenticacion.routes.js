@@ -14,6 +14,20 @@ angular.module('autenticacion').config(['$routeProvider',
                     requiredLogin: false,
                     userShouldBeAdmin: false
                 }
+            })
+            .when('/restaurar-password/', {
+                templateUrl: '/modules/autenticacion/views/restaurar-password-form.view.html',
+                access: {
+                    requiredLogin: false,
+                    userShouldBeAdmin: false
+                }
+            })
+            .when('/restaurar-password/:code', {
+                templateUrl: '/modules/autenticacion/views/restaurar-password-code-form.view.html',
+                access: {
+                    requiredLogin: false,
+                    userShouldBeAdmin: false
+                }
             });
     }
 ]);
