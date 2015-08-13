@@ -162,8 +162,8 @@ mainApplicationModule
             $locationProvider.hashPrefix('!');
 
             // Parametros de configuración para la autenticacion
-            $authProvider.loginUrl = 'http://api.hoyadonde.omm/login';
-            $authProvider.signupUrl = 'http://api.hoyadonde.omm/signup';
+            $authProvider.loginUrl = 'https://apihoyadonde.herokuapp.com/login';
+            $authProvider.signupUrl = 'https://apihoyadonde.herokuapp.com/signup';
             $authProvider.tokenName = "token";
             $authProvider.tokenPrefix = "had";
         }
@@ -212,10 +212,8 @@ mainApplicationModule
     );
 
 mainApplicationModule.constant('url', {
-    API: 'http://api.hoyadonde.omm/v1',
-    APIBASE: 'http://api.hoyadonde.omm',
-    APIHeroku: 'https://apihoyadonde.herokuapp.com/v1',
-    APIHerokuBase: 'https://apihoyadonde.herokuapp.com'
+    API: 'https://apihoyadonde.herokuapp.com/v1',
+    APIBASE: 'https://apihoyadonde.herokuapp.com'
 })
     .constant('googleStyle', {
         style: style
