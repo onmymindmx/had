@@ -20,7 +20,8 @@ angular.module('autenticacion').controller('AutenticacionController', ['$scope',
 
         $scope.isAdmin = function() {
             var token = $auth.getPayload();
-            if(token.user.isAdmin === 1) {
+
+            if(token && token.user && token.user.isAdmin === 1) {
                 return true;
             } else {
                 return false;
